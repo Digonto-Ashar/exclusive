@@ -1,0 +1,6 @@
+<a routerLink="/category/{{ categoryName | lowercase }}" class="category-card-container">
+  <div class="icon-wrapper">
+    <img [src]="iconUrl" [alt]="categoryName">
+  </div>
+  <p class="category-name">{{ categoryName }}</p>
+</a>

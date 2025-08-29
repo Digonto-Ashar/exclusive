@@ -1,0 +1,61 @@
+<div class="account-container">
+  <div class="top-bar">
+  <div class="breadcrumb"> 
+    <p>Home / <strong>My Account</strong></p>
+    </div>
+     <div class="welcome-container">
+      <app-welcome></app-welcome>
+    </div>
+  </div>
+
+  <div class="account-main-section">
+    
+    <!-- Left Column: Account Navigation Menu -->
+    <div class="account-nav">
+      
+      <!-- "Manage My Account" Section -->
+      <div class="nav-group">
+        <h3 class="nav-title">Manage My Account</h3>
+        <ul class="nav-links">
+          <!-- 
+            Use routerLink to navigate to the child routes.
+            Use routerLinkActive="active" to apply the active class automatically.
+          -->
+          <li><a routerLink="profile" routerLinkActive="active">My Profile</a></li>
+          <li><a routerLink="address-book" routerLinkActive="active">Address Book</a></li>
+          <li><a routerLink="payment-options" routerLinkActive="active">My Payment Options</a></li>
+        </ul>
+      </div>
+
+      <!-- "My Orders" Section -->
+      <div class="nav-group">
+        <h3 class="nav-title">My Orders</h3>
+        <ul class="nav-links">
+          <li><a routerLink="returns" routerLinkActive="active">My Returns</a></li>
+          <li><a routerLink="cancellations" routerLinkActive="active">My Cancellations</a></li>
+        </ul>
+      </div>
+
+      <!-- "My Wishlist" Section -->
+      <div class="nav-group">
+        <a routerLink="/wishlist" class="nav-title-link" routerLinkActive="active-title">My Wishlist</a>
+      </div>
+
+      <!-- "Logout" Button -->
+      <div class="nav-group">
+        <a class="logout-link" (click)="onLogout()">Logout</a>
+      </div>
+
+    </div>
+
+    <!-- Right Column: Main Content -->
+    <div class="account-content">
+      <!-- 
+        This is the placeholder where Angular will render the component
+        that matches the active child route (e.g., ProfileComponent or WishlistComponent).
+      -->
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>

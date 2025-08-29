@@ -1,0 +1,58 @@
+<div class="contact-page-container">
+  <!-- Breadcrumbs -->
+  <div class="breadcrumb">
+    <p>Home / <strong>Contact</strong></p>
+  </div>
+
+  <!-- Main two-column section -->
+  <div class="contact-main-section">
+    
+    <!-- Left Column: Info -->
+<div class="contact-info-panel">
+  <div class="info-block">
+    <div class="icon-title">
+      <!-- The new container for the icon -->
+      <div class="icon-container">
+        <img src="assets/icons/call.svg" alt="Phone">
+      </div>
+      <h3>Call To Us</h3>
+    </div>
+    <p>We are available 24/7, 7 days a week.</p>
+    <p>Phone: +8801611112222</p>
+  </div>
+  <hr>
+  <div class="info-block">
+    <div class="icon-title">
+      <!-- The new container for the icon -->
+      <div class="icon-container">
+        <img src="assets/icons/email.svg" alt="Email">
+      </div>
+      <h3>Write To US</h3>
+    </div>
+    <p>Fill out our form and we will contact you within 24 hours.</p>
+    <p>Emails: customer@exclusive.com</p>
+    <p>Emails: support@exclusive.com</p>
+  </div>
+</div>
+
+
+    <!-- Right Column: Form -->
+    <div class="contact-form-panel">
+      <!-- Bind the formGroup and ngSubmit -->
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <input type="text" placeholder="Your Name " formControlName="name">
+          <input type="email" placeholder="Your Email " formControlName="email">
+          <input type="tel" placeholder="Your Phone " formControlName="phone">
+        </div>
+        <div class="form-row">
+          <textarea placeholder="Your Message" formControlName="message"></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="send-btn">Send Message</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

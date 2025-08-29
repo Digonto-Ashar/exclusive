@@ -1,0 +1,179 @@
+@use '../../../styles.scss' as *;
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+  width: 100%;
+  gap: 130px;
+}
+
+// --- Left Side: Image Panel ---
+.image-panel {
+  flex-shrink: 0; // Prevents the image from shrinking
+  img {
+    max-width: 650px;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+// --- Right Side: Form Panel ---
+.form-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 370px;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; // Adds space between title, subtitle, and form
+
+  h1 {
+    font-size: 36px;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  p {
+    font-size: 16px;
+    margin: 0;
+  }
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px; // Adds space between the input fields
+
+  input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    padding: 8px 0;
+    font-size: 16px;
+    outline: none; // Removes the default blue outline on focus
+
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.4);
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.login-button {
+  @extend .view-all-button; // Reuses the global button style we made
+  padding: 16px 48px;
+}
+
+.forgot-password-link {
+  color: $primary-color;
+  font-size: 16px;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.7);
+
+  a {
+    color: black;
+    font-weight: 500;
+    text-decoration: underline;
+  }
+}
+// --- Validation Styles ---
+
+// Style for the input field when it's invalid and has been touched
+input.ng-invalid.ng-touched {
+  border-bottom: 1px solid $primary-color; // Use the red color for the border
+}
+
+// Style for the container of the validation message
+.error-message {
+  color: $primary-color;
+  font-size: 14px;
+  margin-top: 4px; // Add a little space above the message
+}
+
+.loader-backdrop {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.spinner {
+  border: 6px solid #f6f6f6;
+  border-top: 6px solid #ff4c60;
+  border-radius: 50%;
+  width: 48px; height: 48px;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+
+// ===================================================================
+// ===  RESPONSIVE STYLES FOR LOGIN PAGE
+// ===================================================================
+
+@media (max-width: 900px) {
+
+  // --- Main Layout Stacking ---
+  // Switch the layout to a single vertical column
+  .login-container {
+    flex-direction: column;
+    gap: 40px; // A healthy gap between the stacked image and form
+    padding: 40px 15px;
+  }
+
+  // --- Image Panel Responsiveness ---
+  // Ensure the image scales correctly
+  .image-panel img {
+    max-width: 100%; // Make the image fluid, never wider than its container
+    height: auto;    // Maintain the image's aspect ratio
+  }
+
+  // --- Form Panel Adjustments ---
+  // Allow the form to take up the full width of the screen
+  .form-panel {
+    width: 100%;
+  }
+
+  // --- Typography ---
+  // Reduce the main title size for a more balanced mobile layout
+  .form-content h1 {
+    font-size: 28px;
+  }
+  
+  // --- Actions & Links ---
+  // Stack the login button and the "Forgot Password" link
+  .actions {
+      flex-direction: column;
+      gap: 20px;
+      
+      .login-button {
+          width: 100%; // Make the primary button full-width
+      }
+  }
+}

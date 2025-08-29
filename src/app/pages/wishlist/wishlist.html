@@ -1,0 +1,83 @@
+<div class="wishlist-page-container">
+
+  <!-- Header -->
+  <div class="header">
+    <!-- 1. Use the correct wishlistCount$ observable -->
+    <h2>Wishlist ({{ wishlistCount$ | async }})</h2>
+    <button class="move-all-btn" (click)="moveAllToBag()">Move All To Bag</button>
+  </div>
+
+  <!-- Products Grid -->
+  <div class="products-grid">
+    <!-- 2. The @if now uses the correct wishlistItems$ observable -->
+    @if (wishlistItems$ | async; as products) {
+      
+      <!-- 3. The @for loops over 'products' and tracks by 'product.id' -->
+      @for (product of products; track product.id) {
+        <app-product-card 
+          [product]="product"
+          [showRemoveButton]="true"
+          (remove)="onRemoveFromWishlist($event)">
+        </app-product-card>
+      }
+
+      <!-- The empty message logic is now simpler -->
+      @if (products.length === 0) {
+        <p class="empty-message">Your wishlist is empty.</p>
+      }
+    }
+  </div>
+
+<!-- Section: Just For You (with Carousel/Grid Toggle) -->
+<section class="just-for-you-section" #justForYouSection>
+  
+  <!-- Custom Section Header with Toggle Button -->
+  <div class="custom-section-header">
+    <div class="title-container">
+      <div class="indicator"></div>
+      <h2 class="title">Just For You</h2>
+    </div>
+    <button class="see-all-btn" (click)="toggleJustForYouView()">
+      {{ isJustForYouExpanded ? 'View Less' : 'See All' }}
+    </button>
+  </div>
+
+  <!-- This container will hold either the skeletons, the carousel, or the grid -->
+  <div class="products-container">
+    
+    <!-- SKELETON LOADER: Shows only when loading -->
+    @if (isJustForYouLoading) {
+      <div class="products-grid">
+        @for (item of justForYouSkeletonItems; track $index) {
+          <app-skeleton-product-card></app-skeleton-product-card>
+        }
+      </div>
+    }
+
+    <!-- ACTUAL CONTENT: Shows only after loading is complete -->
+    @if (!isJustForYouLoading) {
+      
+      <!-- Carousel View (Default) -->
+      @if (!isJustForYouExpanded) {
+        <div #justForYouCarousel class="products-carousel">
+          @for (product of justForYouProducts; track product.id) {
+            <app-product-card [product]="product"></app-product-card>
+          }
+        </div>
+      }
+
+      <!-- Expanded Grid View -->
+      @if (isJustForYouExpanded) {
+        <div class="products-grid">
+          @for (product of _allJustForYouProducts; track product.id) {
+            <app-product-card [product]="product"></app-product-card>
+          }
+        </div>
+      }
+    }
+  </div>
+
+</section>
+
+
+</div>

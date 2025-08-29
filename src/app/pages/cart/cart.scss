@@ -1,0 +1,279 @@
+@use '../../../styles.scss' as *;
+
+.cart-page {
+  // This is the definitive fix for the page layout
+  max-width: 1170px;
+  margin: 80px auto 140px;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.breadcrumbs {
+  color: rgba(0, 0, 0, 0.5);
+  margin-bottom: 80px;
+  font-size: 16px;
+
+  .breadcrumb-link {
+    color: inherit; // Inherits the gray color
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: black; // Changes color on hover
+      
+    }
+  }
+
+  .breadcrumb-separator {
+    margin: 0 12px; // Adds space around the slash
+  }
+
+  .breadcrumb-active {
+    color: #000000; // Makes the current page text black and bold
+    font-weight: 500;
+  }
+}
+
+.cart-table {
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  padding: 24px 40px;
+}
+
+.cart-header, .cart-item {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  padding: 24px 0;
+}
+
+.cart-header {
+  font-weight: 500;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.cart-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.product-details {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 20px;
+  position: relative;
+}
+
+.product-image {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+}
+
+.remove-btn {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  border: none;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding-bottom: 2px;
+}
+
+.remove-btn img {
+  width: 16px;   // Set a small, fixed width for the icon
+  height: 16px;  // Set a small, fixed height for the icon
+}
+
+.quantity input {
+  width: 72px;
+  height: 44px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  outline: none;
+}
+
+.cart-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.btn {
+  padding: 16px 48px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-secondary {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  background-color: white;
+  color: black;
+  &:hover { background-color: #f2f2f2; }
+}
+
+.btn-primary {
+  border: none;
+  background-color: $primary-color;
+  color: white;
+  &:hover { opacity: 0.9; }
+}
+
+.checkout-section {
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.coupon-box {
+  display: flex;
+  gap: 16px;
+  input {
+    padding: 16px 24px;
+    border-radius: 4px;
+    border: 1px solid black;
+    width: 300px;
+  }
+}
+
+.cart-total-box {
+  border: 1.5px solid black;
+  border-radius: 4px;
+  padding: 32px 24px;
+  width: 470px;
+  
+  h3 {
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 24px;
+  }
+
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+    &.total {
+      border-bottom: none;
+      font-weight: 500;
+    }
+  }
+
+  .btn-checkout {
+    width: 100%;
+    margin-top: 16px;
+  }
+}
+
+
+// ===================================================================
+// ===  RESPONSIVE STYLES FOR CART PAGE
+// ===================================================================
+
+@media (max-width: 900px) {
+
+  // --- General Page Layout ---
+  // Reduce the top and bottom margins on the main container
+  .cart-page {
+    margin: 40px auto;
+  }
+  
+  // Hide the breadcrumbs on mobile to save space
+  .breadcrumbs {
+    display: none;
+  }
+
+  // --- The Main Cart Table Transformation ---
+  
+  // Hide the original table header, as it's no longer needed
+  .cart-header {
+    display: none;
+  }
+  
+  // Remove the rigid box shadow and padding from the table wrapper
+  .cart-table {
+    box-shadow: none;
+    padding: 0;
+  }
+
+  // This is the core of the fix. We switch the grid to a single column.
+  .cart-item {
+    grid-template-columns: 1fr;
+    gap: 16px; // Add some space between the stacked data
+    text-align: left; // Align all text to the left
+    padding: 24px 0;
+  }
+  
+
+
+  // --- Add Labels for Context ---
+  // This is a professional technique to add back context for each data point
+  .cart-item .price::before {
+    content: 'Price: ';
+    font-weight: 500;
+    margin-right: 8px;
+  }
+
+  .cart-item .quantity::before {
+    content: 'Quantity: ';
+    font-weight: 500;
+    margin-right: 8px;
+  }
+  
+  .cart-item .subtotal::before {
+    content: 'Subtotal: ';
+    font-weight: 500;
+    margin-right: 8px;
+  }
+  
+  .cart-item .quantity, .cart-item .price, .cart-item .subtotal {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10px; // Add a little padding for alignment
+  }
+
+  // --- Action Buttons ---
+  // Stack the action buttons vertically
+  .cart-actions {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  // --- Checkout Section ---
+  // Stack the coupon and total boxes vertically
+  .checkout-section {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  // Make the coupon input and cart total box take up the full width
+  .coupon-box, .cart-total-box {
+    width: 100%;
+  }
+  
+  .coupon-box {
+      flex-direction: column;
+  }
+  
+  .coupon-box input {
+      width: 100%;
+  }
+}

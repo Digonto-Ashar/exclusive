@@ -1,0 +1,4 @@
+<div *ngIf="alert" [@alertState]="alert.animation" class="alert-container" [ngClass]="alert.type">
+  <span>{{ alert.message }}</span>
+  <button (click)="close()" class="close-btn" aria-label="Close alert">&times;</button>
+</div>

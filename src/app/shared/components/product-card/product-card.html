@@ -1,0 +1,59 @@
+<!-- The main container now correctly links to the product details page -->
+<div class="product-card-container" [routerLink]="['/product', product.id]">
+
+  <!-- Image Wrapper -->
+  <div class="image-container">
+    
+    <!-- Discount Badge -->
+    @if (product.discountPercent) {
+      <div class="discount-badge">
+        -{{ product.discountPercent }}%
+      </div>
+    }
+
+    <!-- Top-Right Actions Overlay -->
+    <div class="actions-overlay">
+      
+      @if (showRemoveButton) {
+        <button class="icon-button" (click)="onRemoveClick($event)" aria-label="Remove from wishlist">
+          <img src="assets/icons/trash.svg" alt="Remove">
+        </button>
+      }
+
+      <button class="icon-button" (click)="onToggleWishlist($event)" aria-label="Toggle wishlist">
+        @if (isInWishlist) {
+          <img src="assets/icons/heart-filled.svg" alt="In Wishlist">
+        } @else {
+          <img src="assets/icons/heart.svg" alt="Add to Wishlist">
+        }
+      </button>
+
+      <!-- The routerLink now correctly uses product.id -->
+      <button class="icon-button" [routerLink]="['/product', product.id]" aria-label="View product">
+        <img src="assets/icons/eye.svg" alt="View">
+      </button>
+    </div>
+
+    <!-- The image source now correctly uses product.image and product.title -->
+    <img [src]="product.image" [alt]="product.title">
+
+    <!-- The click handler now correctly passes the $event -->
+    <button class="add-to-cart-button" (click)="onAddToCart($event)">Add To Cart</button>
+  </div>
+
+  <!-- Product Details Section -->
+  <div class="product-details">
+    <!-- All properties are now accessed via the 'product' object -->
+    <h3 class="product-name">{{ product.title }}</h3>
+    <div class="price-info">
+      <span class="current-price">${{ product.price }}</span>
+      @if (product.oldPrice) {
+        <span class="old-price">${{ product.oldPrice }}</span>
+      }
+    </div>
+    <div class="rating-info">
+      <span class="star-rating" [innerHTML]="getStarRating(product.rating.rate || 0)"></span>
+      <span class="review-count">({{ product.rating.count || 0 }})</span>
+    </div>
+  </div>
+</div>

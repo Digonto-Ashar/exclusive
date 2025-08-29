@@ -1,0 +1,67 @@
+<div class="login-container">
+  <!-- Left Side: Image Panel -->
+<div class="image-panel">
+  <!-- Skeleton Loader -->
+  <ngx-skeleton-loader
+    *ngIf="!imageLoaded"
+    [theme]="{ 'height': '600px', 'width': '800px', 'border-radius': '0' }"
+  ></ngx-skeleton-loader>
+
+  <!-- Actual Image (hidden until loaded) -->
+  <img 
+    src="assets/images/auth-image1.jpg" 
+    alt="E-commerce promotional image"
+    (load)="imageLoaded = true"
+    [hidden]="!imageLoaded"
+  >
+</div>
+
+  <!-- Right Side: Form Panel -->
+  <div class="form-panel">
+    <div class="form-content">
+      <h1>Log in to Exclusive</h1>
+      <p>Enter your details below</p>
+
+      <!-- THIS IS THE FORM SECTION -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        
+        <!-- Input field for Username -->
+        <div class="form-field">
+          <input type="text" placeholder="Username" formControlName="username">
+          
+          <!-- CORRECTED VALIDATION BLOCK -->
+          <div *ngIf="f['username'].invalid && (f['username'].dirty || f['username'].touched)" class="error-message">
+            <div *ngIf="f['username'].errors?.['required']">Username is required.</div>
+          </div>
+
+        </div>
+        
+        <!-- Input field for Password -->
+        <div class="form-field">
+          <input type="password" placeholder="Password" formControlName="password">
+
+          <!-- CORRECTED VALIDATION BLOCK -->
+          <div *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched)" class="error-message">
+            <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
+          </div>
+
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="login-button">Log In</button>
+          <a routerLink="/forgot-password" class="forgot-password-link">Forgot Password?</a>
+        </div>
+      </form>
+
+      <div *ngIf="isLoading" class="loader-backdrop">
+  <div class="spinner"></div>
+</div>
+
+
+      <div class="signup-link">
+        <span>Don't have an account? <a routerLink="/signup">Sign Up</a></span>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="order-summary-section">
+  <!-- Product List -->
+  <div class="order-products">
+    <div class="order-product" *ngFor="let item of cartItems">
+      <img [src]="item.product.image" alt="{{item.product.title}}" class="product-image">
+      <span class="product-name">{{ item.product.title }}</span>
+      <span class="product-price">${{ item.product.price }}</span>
+    </div>
+  </div>
+
+  <!-- Totals -->
+  <div class="order-totals">
+    <div class="totals-row">
+      <span>Subtotal:</span>
+      <span>${{ subtotal }}</span>
+    </div>
+    <div class="totals-row">
+      <span>Shipping:</span>
+      <span>{{ shipping === 0 ? 'Free' : '$' + shipping }}</span>
+    </div>
+    <div class="totals-row total-final">
+      <span>Total:</span>
+      <span>${{ total }}</span>
+    </div>
+  </div>
+
+  <!-- Payment Method -->
+  <div class="payment-method">
+    <label>
+      <input type="radio" name="payment" [(ngModel)]="paymentMethod" value="bank"> Bank
+    </label>
+    <label>
+      <input type="radio" name="payment" [(ngModel)]="paymentMethod" value="cod"> Cash on delivery
+    </label>
+  </div>
+
+  <!-- Coupon -->
+  <div class="coupon-row">
+    <input class="coupon-input" type="text" [(ngModel)]="couponCode" placeholder="Coupon Code">
+    <button 
+  class="apply-coupon-btn"
+  [class.btn-loading]="isApplyingCoupon"
+  [disabled]="isApplyingCoupon"
+  (click)="onApplyCoupon()">
+  Apply Coupon
+</button>
+  </div>
+
+  <!-- Place Order -->
+  <button 
+  class="place-order-btn"
+  [class.btn-loading]="isPlacingOrder"
+  [disabled]="isPlacingOrder"
+  (click)="onPlaceOrder()">
+  Place Order
+</button>
+</div>

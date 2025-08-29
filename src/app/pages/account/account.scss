@@ -1,0 +1,160 @@
+
+// --- Main Account Page Layout ---
+.account-container {
+  max-width: 1170px;
+  margin: 80px auto;
+  padding: 0 20px;
+}
+
+.welcome-container {
+  text-align: right;
+  margin-bottom: 60px;
+}
+
+
+.breadcrumb {
+  margin-bottom: 20px;
+  color: #808080;
+  font-size: 14px;
+  
+  strong {
+    color: black;
+  }
+}
+
+// This creates the two-column layout
+.account-main-section {
+  display: flex;
+  gap: 80px; // The space between the nav and the content
+  align-items: flex-start; // Aligns items to the top
+}
+
+// --- Left Column: Navigation Menu ---
+.account-nav {
+  flex-basis: 220px; // Give the nav a fixed width
+  flex-shrink: 0;
+}
+
+// --- Right Column: Main Content Area ---
+.account-content {
+  flex-grow: 1; // Allow the content to take up the rest of the space
+  padding: 20px 40px; // Add some internal padding
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08); // A subtle shadow like the design
+  border-radius: 4px;
+}
+
+// --- Navigation Menu Styles ---
+.nav-group {
+  margin-bottom: 24px;
+}
+
+.nav-title {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: black;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0 30px; // Indent the links under the title
+
+  li {
+    margin-bottom: 12px;
+  }
+
+  a {
+    text-decoration: none;
+    color: #808080; // Default grey color for links
+    font-size: 16px;
+    transition: color 0.3s ease;
+
+    // This styles the link when its route is active
+    &.active {
+      color: #db4444; // Active red color
+    }
+    
+    // Also apply the red color on hover for better UX
+    &:hover {
+      color: #db4444;
+    }
+  }
+}
+
+// This is for standalone links like "My Wishlist"
+.nav-title-link {
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  color: black;
+  transition: color 0.3s ease;
+
+  &.active-title, // A different active class if you want a different style
+  &:hover {
+    color: #db4444;
+  }
+}
+
+// Styles for the "Logout" link
+.logout-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: #808080;
+  cursor: pointer; // Make it look clickable
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #db4444;
+  }
+}
+
+
+// ===================================================================
+// ===  RESPONSIVE STYLES FOR ACCOUNT PAGE LAYOUT
+// ===================================================================
+
+@media (max-width: 900px) {
+
+  // Hide the breadcrumbs and adjust the main page margins
+  .breadcrumb {
+    display: flex;
+  }
+  .account-container {
+    margin-top: 40px;
+  }
+
+
+  // --- Main Layout Stacking ---
+  // Switch the main two-column layout to a single vertical column
+  .account-main-section {
+    flex-direction: column;
+    gap: 30px; // Reduce the gap for the vertical layout
+  }
+
+
+      .welcome-container {
+    text-align: center; // Center the text on mobile
+    margin-bottom: 40px; // Add some space below it to separate it from the content
+  }
+
+  // --- Mobile Navigation Menu ---
+  // Make the navigation take up the full width and center the text
+  .account-nav {
+    flex-basis: auto;
+    width: 100%;
+  
+  }
+  
+  // Remove the left margin from the nav links so they can be centered
+  .nav-links {
+    margin-left: 0;
+  }
+
+  // --- Mobile Content Area ---
+  // Remove the desktop-specific shadow and padding
+  .account-content {
+    box-shadow: none;
+    padding: 20px 0; // Use vertical padding only
+  }
+}

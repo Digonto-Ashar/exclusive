@@ -1,0 +1,44 @@
+@use '../../../../styles.scss' as *;
+
+.category-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px; /* This creates the space between the icon and the text */
+  width: 160px;
+  height: 145px;
+  border: 1px solid rgba(0, 0, 0, 0.2); /* A slightly lighter border */
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none; /* Removes underline from the link */
+  color: inherit; /* Ensures text color is black by default */
+
+  .icon-wrapper {
+    /* The wrapper doesn't need a size, it just holds the image */
+    img {
+      /* THIS IS THE KEY FIX: We set the icon's size directly */
+      width: 56px;
+      height: 56px;
+      object-fit: contain; /* Ensures the icon scales correctly without stretching */
+    }
+  }
+
+  .category-name {
+    font-size: 16px;
+  }
+
+  /* The hover and active state styling you see in the 'Camera' example */
+  &:hover,
+  &.active {
+    background-color: $primary-color;
+    color: white;
+    border-color: $primary-color;
+
+    .icon-wrapper img {
+      /* This filter cleverly turns a black icon white */
+      filter: brightness(0) invert(1);
+    }
+  }
+}

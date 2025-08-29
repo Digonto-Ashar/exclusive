@@ -1,0 +1,11 @@
+<button
+  [type]="type"
+  class="btn"
+  [ngClass]="{
+    'btn--primary': variant === 'primary',
+    'btn--secondary': variant === 'secondary',
+    'btn--google': variant === 'google',
+    'btn--full-width': fullWidth
+  }">
+  {{ text }}
+</button>

@@ -1,0 +1,248 @@
+<div class="home-container">
+  <!-- Top Section: Sidebar + Hero Banner -->
+
+<button class="category-menu-toggle" (click)="toggleCategoryMenu()">
+  <img src="assets/icons/menu.svg" alt="Categories">
+  <span>Categories</span>
+</button>
+
+<!-- The main layout wrapper -->
+<div class="top-section-wrapper">
+  
+  <!-- The sidebar now correctly uses [class.is-open] -->
+<div class="category-sidebar" [class.is-open]="isCategoryMenuOpen">
+  
+  <!-- THIS IS THE NEW CLOSE BUTTON -->
+  <button class="sidebar-close-button" (click)="closeCategoryMenu()">
+    <img src="assets/icons/close.svg" alt="Close Menu">
+  </button>
+
+  <ul>
+    <!-- Each list item also closes the menu -->
+    <li *ngFor="let category of categories" (click)="closeCategoryMenu()">
+      <a href="#">{{ category }}</a>
+    </li>
+  </ul>
+</div>
+
+  <div 
+  class="sidebar-overlay" 
+  [class.is-visible]="isCategoryMenuOpen" 
+  (click)="closeCategoryMenu()">
+</div>
+
+    <div class="main-content-area">
+      <div class="hero-slider-container">
+        <div *ngFor="let slide of slides; let i = index" class="slide" [class.active]="i === currentSlide">
+          <div class="slide-content">
+            <div class="banner-text">
+              <p class="brand-info">{{ slide.brandInfo }}</p>
+              <h1>{{ slide.title }}</h1>
+              <a [href]="slide.shopNowLink" class="shop-now-link">Shop Now</a>
+            </div>
+            <div class="banner-image">
+              <img [src]="slide.imageUrl" [alt]="slide.title">
+            </div>
+          </div>
+        </div>
+        <div class="slider-dots">
+          <span *ngFor="let slide of slides; let i = index" class="dot" [class.active]="i === currentSlide" (click)="goToSlide(i)"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 1: Flash Sales -->
+<section class="content-section" #flashSalesSection>
+  <app-section-header category="Today's" title="Flash Sales">
+    <div timer class="countdown-timer">
+        <div class="time-block">
+    <span class="label">Days</span>
+    <span class="value">{{ countdown.days | number: '2.0' }}</span>
+  </div>
+  
+  <span class="separator">:</span>
+  
+  <div class="time-block">
+    <span class="label">Hours</span>
+    <span class="value">{{ countdown.hours | number: '2.0' }}</span>
+  </div>
+  
+  <span class="separator">:</span>
+  
+  <div class="time-block">
+    <span class="label">Minutes</span>
+    <span class="value">{{ countdown.minutes | number: '2.0' }}</span>
+  </div>
+  
+  <span class="separator">:</span>
+  
+  <div class="time-block">
+    <span class="label">Seconds</span>
+    <span class="value">{{ countdown.seconds | number: '2.0' }}</span>
+  </div>
+    </div>
+    <!-- Scroll buttons are only visible when NOT expanded (i.e., in carousel mode) -->
+    <div nav-buttons class="nav-buttons" *ngIf="!isFlashSalesExpanded">
+      <button class="nav-arrow" (click)="scrollCarousel('left', flashSaleCarousel)"><img src="assets/icons/arrow-left.svg" alt="Scroll Left"></button>
+      <button class="nav-arrow" (click)="scrollCarousel('right', flashSaleCarousel)"><img src="assets/icons/arrow-right.svg" alt="Scroll Right"></button>
+    </div>
+  </app-section-header>
+
+  <!-- Container for the Carousel View -->
+  <div *ngIf="!isFlashSalesExpanded">
+    <div #flashSaleCarousel class="products-carousel">
+      <ng-container *ngIf="isLoading"><app-skeleton-product-card *ngFor="let item of skeletonItems"></app-skeleton-product-card></ng-container>
+      <ng-container *ngIf="!isLoading">
+        <app-product-card *ngFor="let product of flashSaleProducts" [product]="product"></app-product-card>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Container for the Expanded Grid View -->
+  <div *ngIf="isFlashSalesExpanded">
+    <div class="products-grid">
+      <ng-container *ngIf="isLoading"><app-skeleton-product-card *ngFor="let item of skeletonItems"></app-skeleton-product-card></ng-container>
+      <ng-container *ngIf="!isLoading">
+        <!-- This now loops through the FULL list of products -->
+        <app-product-card *ngFor="let product of _allFlashSaleProducts" [product]="product"></app-product-card>
+      </ng-container>
+    </div>
+  </div>
+  
+  <!-- The View All button now correctly toggles between these two views -->
+  <div class="view-all-container">
+    <button class="view-all-products-button" (click)="toggleFlashSalesView()">
+      {{ isFlashSalesExpanded ? 'View Less' : 'View All Products' }}
+    </button>
+  </div>
+</section>
+
+  <hr class="section-divider">
+
+  <!-- Section 2: Browse By Category -->
+  <section class="content-section">
+    <app-section-header category="Categories" title="Browse By Category">
+      <div nav-buttons class="nav-buttons">
+        <button class="nav-arrow" (click)="scrollCategoriesLeft()"><img src="assets/icons/arrow-left.svg" alt="Scroll Left"></button>
+        <button class="nav-arrow" (click)="scrollCategoriesRight()"><img src="assets/icons/arrow-right.svg" alt="Scroll Right"></button>
+      </div>
+    </app-section-header>
+    <div #categoryGrid class="category-grid">
+      <app-category-card *ngFor="let category of browseCategories" [categoryName]="category.name" [iconUrl]="category.icon"></app-category-card>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- Section 3: Top Rated Products -->
+
+<section class="content-section" #bestSellingSection>
+  <app-section-header category="This Month" title="Top Rated Products">
+    <!-- Scroll buttons are only visible when NOT expanded (i.e., in carousel mode) -->
+    <div nav-buttons class="nav-buttons" *ngIf="!isBestSellingExpanded">
+      <button class="nav-arrow" (click)="scrollCarousel('left', bestSellingCarousel)"><img src="assets/icons/arrow-left.svg" alt="Scroll Left"></button>
+      <button class="nav-arrow" (click)="scrollCarousel('right', bestSellingCarousel)"><img src="assets/icons/arrow-right.svg" alt="Scroll Right"></button>
+    </div>
+  </app-section-header>
+
+  <!-- Container for the Carousel View -->
+  <div *ngIf="!isBestSellingExpanded">
+    <div #bestSellingCarousel class="products-carousel" style="margin-top: 60px;">
+      <ng-container *ngIf="isBestSellingLoading"><app-skeleton-product-card *ngFor="let item of bestSellingSkeletonItems"></app-skeleton-product-card></ng-container>
+      <ng-container *ngIf="!isBestSellingLoading">
+        <app-product-card *ngFor="let product of bestSellingProducts" [product]="product"></app-product-card>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Container for the Expanded Grid View -->
+  <div *ngIf="isBestSellingExpanded">
+    <div class="products-grid" style="margin-top: 60px;">
+      <ng-container *ngIf="isBestSellingLoading"><app-skeleton-product-card *ngFor="let item of bestSellingSkeletonItems"></app-skeleton-product-card></ng-container>
+      <ng-container *ngIf="!isBestSellingLoading">
+        <!-- This now loops through the FULL list of best selling products -->
+        <app-product-card *ngFor="let product of _allBestSellingProducts" [product]="product"></app-product-card>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- The View All button now correctly toggles the best selling views -->
+  <div class="view-all-container">
+    <button class="view-all-products-button" (click)="toggleBestSellingView()">
+      {{ isBestSellingExpanded ? 'View Less' : 'View All Products' }}
+    </button>
+  </div>
+</section>
+
+  <app-promo-banner></app-promo-banner>
+  <hr class="section-divider">
+
+  <!-- Section 4: Explore Our Products -->
+  <section class="content-section" #exploreProductsSection>
+    <app-section-header category="Our Products" title="Explore Our Products" ></app-section-header>
+    <div class="products-grid" >
+      <ng-container *ngIf="isExploreLoading"><app-skeleton-product-card *ngFor="let item of exploreSkeletonItems"></app-skeleton-product-card></ng-container>
+      <ng-container *ngIf="!isExploreLoading">
+        <!-- CORRECTED BINDING -->
+        <app-product-card *ngFor="let product of exploreProducts" [product]="product"></app-product-card>
+      </ng-container>
+    </div>
+    <div class="view-all-container" >
+     <button class="view-all-products-button" 
+        (click)="toggleExploreProductsView(); ">
+  {{ isExploreProductsExpanded ? 'View Less' : 'View All Products' }}
+</button>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- Section 5: New Arrival -->
+  <section class="content-section">
+    <app-section-header category="Featured" title="New Arrival"></app-section-header>
+    <div class="new-arrival-grid">
+      <div class="promo-item promo-large" style="background-image: url('assets/images/ps5-promo.png');">
+        <div class="promo-text">
+          <h3>PlayStation 5</h3>
+          <p>Black and White version of the PS5 coming out on sale.</p>
+          <a href="#">Shop Now</a>
+        </div>
+      </div>
+      <div class="promo-right-column">
+        <div class="promo-item promo-tall" style="background-image: url('assets/images/woman-promo.png');">
+          <div class="promo-text">
+            <h3>Women's Collections</h3>
+            <p>Featured woman collections that give you another vibe.</p>
+            <a href="#">Shop Now</a>
+          </div>
+        </div>
+        <div class="promo-bottom-row">
+          <div class="promo-item promo-small" style="background-image: url('assets/images/speaker-promo.png');">
+            <div class="promo-text">
+              <h3>Speakers</h3>
+              <p>Amazon wireless speakers.</p>
+              <a href="#">Shop Now</a>
+            </div>
+          </div>
+          <div class="promo-item promo-small" style="background-image: url('assets/images/perfume-promo.png');">
+            <div class="promo-text">
+              <h3>Perfume</h3>
+              <p>Gucci intense Oud Edp</p>
+              <a href="#">Shop Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- Section 6: Service Features -->
+  <section class="services-section">
+    <div class="services-grid">
+      <app-service-feature *ngFor="let feature of serviceFeatures" [iconUrl]="feature.iconUrl" [title]="feature.title" [subtitle]="feature.subtitle"></app-service-feature>
+    </div>
+  </section>
+</div>

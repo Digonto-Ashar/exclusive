@@ -1,0 +1,73 @@
+<div class="container cart-page">
+  <!-- Breadcrumbs -->
+ <div class="breadcrumbs">
+  <a routerLink="/" class="breadcrumb-link">Home</a>
+  <span class="breadcrumb-separator">/</span>
+  <span class="breadcrumb-active">Cart</span>
+</div>
+
+  <div class="cart-table">
+    <!-- Table Header -->
+    <div class="cart-header">
+      <div>Product</div>
+      <div>Price</div>
+      <div>Quantity</div>
+      <div>Subtotal</div>
+    </div>
+
+    <!-- Table Body -->
+    <div class="cart-body" *ngIf="(cartItems$ | async) as items">
+      <div class="cart-item" *ngFor="let item of items">
+        <div class="product-details">
+          <button (click)="removeItem(item)" class="remove-btn">
+            <img src="assets/icons/remove1.svg" alt="Remove item">
+          </button>
+          
+          <!-- FIX: Use the first image from the 'images' array -->
+                    <img [src]="item.product.image" [alt]="item.product.title" class="product-image">
+          
+          <span>{{ item.product.title }}</span>
+        </div>
+        <div class="price">{{ item.product.price | currency:'$' }}</div>
+        <div class="quantity">
+          <input type="number" [value]="item.quantity" (change)="onQuantityChange($event, item)" min="1">
+        </div>
+        <div class="subtotal">{{ (item.product.price * item.quantity) | currency:'$' }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Actions -->
+  <div class="cart-actions">
+    <!-- This button can use a routerLink to go back to the main shop page -->
+      <button class="btn btn-secondary" routerLink="/">Return To Shop</button>
+    <button class="btn btn-secondary" (click)="updateCart()">Update Cart</button>
+  </div>
+
+  <!-- Coupon and Totals Section -->
+  <div class="checkout-section">
+    <div class="coupon-box">
+      <input type="text" placeholder="Coupon Code">
+      <!-- CHANGE 1: Add the (click) handler for applying the coupon -->
+      <button class="btn btn-primary" (click)="applyCoupon()">Apply Coupon</button>
+    </div>
+
+    <div class="cart-total-box" *ngIf="(cartTotals$ | async) as totals">
+      <h3>Cart Total</h3>
+      <div class="total-row">
+        <span>Subtotal:</span>
+        <span>{{ totals.subtotal | currency:'$' }}</span>
+      </div>
+      <div class="total-row">
+        <span>Shipping:</span>
+        <span>{{ totals.shipping === 0 ? 'Free' : (totals.shipping | currency:'$') }}</span>
+      </div>
+      <div class="total-row total">
+        <span>Total:</span>
+        <span>{{ totals.total | currency:'$' }}</span>
+      </div>
+      <!-- CHANGE 2: Add the (click) handler for proceeding to checkout -->
+      <button class="btn btn-primary btn-checkout" (click)="proceedToCheckout()">Proceed to checkout</button>
+    </div>
+  </div>
+</div>

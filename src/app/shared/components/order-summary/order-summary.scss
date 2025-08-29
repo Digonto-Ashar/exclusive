@@ -1,0 +1,157 @@
+/* 
+  =======================================================
+  === FINAL, DEFINITIVE STYLES FOR ORDER SUMMARY COMPONENT ===
+  =======================================================
+*/
+
+// --- Product List in Summary ---
+.order-products {
+  margin-bottom: 32px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 32px;
+}
+
+.order-product {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .product-image {
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
+    margin-right: 24px;
+  }
+
+  .product-name {
+    flex-grow: 1;
+    font-size: 16px;
+    color: black;
+  }
+
+  .product-price {
+    font-size: 16px;
+    color: black;
+  }
+}
+
+// --- Subtotal, Shipping, and Total Rows ---
+.order-totals {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 16px;
+
+  .totals-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+  }
+}
+
+// --- Payment Method Selection ---
+.payment-method {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 32px;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+}
+
+// --- Coupon Code Input and Button ---
+.coupon-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+
+  .coupon-input {
+    flex-grow: 1;
+    padding: 16px;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: white;
+
+    &::placeholder {
+      color: #bfbfbf;
+    }
+  }
+
+  .apply-coupon-btn {
+    padding: 16px 48px;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    background-color: #db4444;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #c23030;
+    }
+  }
+}
+
+// --- Final "Place Order" Button ---
+.place-order-btn {
+  width: auto;
+  padding: 16px 48px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  background-color: #db4444;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #c23030;
+  }
+}
+
+// This class will be added to the button when it's loading
+.btn-loading {
+  position: relative;
+  color: transparent !important; // Hide the button text
+  pointer-events: none; // Prevent clicking while loading
+  
+  // The spinner itself
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-top-color: white; // This part of the circle is solid
+    animation: spinner 0.6s linear infinite;
+  }
+}
+
+// The rotation animation for the spinner
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

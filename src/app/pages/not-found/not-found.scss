@@ -1,0 +1,83 @@
+@use '../../../styles.scss' as *;
+
+.not-found-container {
+  max-width: 1200px;
+  margin: 40px auto 140px;
+  padding: 0 15px;
+
+  .breadcrumb {
+    margin-bottom: 80px;
+  }
+}
+
+.not-found-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  h1 {
+    font-size: 110px;
+    font-weight: 500;
+    margin-bottom: 40px;
+  }
+
+  p {
+    font-size: 16px;
+    margin-bottom: 80px;
+  }
+
+  .home-btn {
+    display: inline-block;
+    background-color: $primary-color;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 16px 48px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+}
+
+// ===================================================================
+// ===  RESPONSIVE STYLES FOR NOT FOUND PAGE
+// ===================================================================
+
+@media (max-width: 768px) {
+
+  // --- General Layout & Typography ---
+  // Hide the breadcrumbs on mobile to save space
+  .breadcrumb {
+    display: none;
+  }
+
+  .not-found-container {
+    margin: 60px auto; // Adjust the top and bottom margins
+  }
+
+  .not-found-content {
+    // Drastically reduce the main heading size for mobile
+    h1 {
+      font-size: 80px;
+      margin-bottom: 20px;
+    }
+
+    // Reduce the paragraph font size and margin
+    p {
+      font-size: 14px;
+      margin-bottom: 50px;
+    }
+    
+    // Make the button full-width for a clear call-to-action
+    .home-btn {
+        width: 100%;
+        max-width: 350px; // Give it a max-width so it doesn't look too wide
+    }
+  }
+}

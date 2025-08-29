@@ -1,0 +1,49 @@
+@use '../../../../styles.scss' as *;
+
+// Keyframes for the shimmer animation
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.skeleton-card {
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+// Base styles for all skeleton elements
+.skeleton-image, .skeleton-text {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  
+  // The shimmer effect
+  animation: shimmer 1.5s linear infinite forwards;
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  position: relative;
+}
+
+// Specific sizes for each part
+.skeleton-image {
+  height: 250px;
+  width: 100%;
+}
+
+.skeleton-text {
+  height: 20px;
+  width: 100%;
+
+  // Modifier classes for different text lengths
+  &.short {
+    width: 60%;
+  }
+  &.tiny {
+    width: 40%;
+  }
+}

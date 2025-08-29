@@ -1,0 +1,57 @@
+.alert-container {
+  position: fixed;
+  // Position it in the top-right corner.
+  top: 20px;
+  right: 250px;
+  
+
+  min-width: 320px;
+  z-index: 2000;
+  color: white;
+  padding: 16px 24px;
+  border-radius: 6px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  // Set the colors based on the alert type
+  &.success {
+    background-color: #28a745; // A nice green
+  }
+
+  &.error {
+    background-color: #dc3545; // A nice red
+  }
+
+   &.info {
+    background-color: #007bff; // A nice, clean blue
+  }
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0 0 20px;
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+
+// --- Media Query for Mobile ---
+// On screens 768px or less, we override the desktop positioning
+@media (max-width: 768px) {
+  .alert-container {
+    
+    right: 15px; // A small margin from the right edge
+    left: 15px;  // A small margin from the left edge
+    width: auto; // Allow the width to be determined by the left/right properties
+  }
+}

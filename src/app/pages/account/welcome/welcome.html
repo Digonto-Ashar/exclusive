@@ -1,0 +1,6 @@
+<!-- The container uses an @if block to only render when the name is available -->
+@if (userName$ | async; as name) {
+  <p class="welcome-message">
+    Welcome, <span class="user-name">{{ name }}</span>
+  </p>
+}

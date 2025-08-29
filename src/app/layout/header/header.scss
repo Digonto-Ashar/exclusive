@@ -1,0 +1,245 @@
+@use '../../../styles.scss' as *;
+
+// Top Promotional Bar
+.promo-bar {
+  background-color: $text-color; // Black background
+  color: white;
+  padding: 12px 0;
+  font-size: 14px;
+  text-align: center;
+
+  .promo-content {
+    max-width: 1170px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end; // Push English selector to the right
+    align-items: center;
+    padding: 0 15px; // Add padding for smaller screens
+  }
+
+  span {
+    margin-right: auto; // Pushes the language selector to the far right
+  }
+
+  .shop-now {
+    color: white;
+    font-weight: 600;
+    margin-left: 8px;
+    text-decoration: underline;
+  }
+
+  .language-selector {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    img {
+      width: 10px; // Adjust dropdown icon size
+      filter: invert(1); // Make dropdown icon white
+    }
+  }
+}
+
+// Main Header
+.app-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); // Lighter border
+  padding: 25px 0;
+}
+
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px; // Add padding for smaller screens
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.main-nav ul {
+  display: flex;
+  gap: 48px; // Increased gap for more spacing
+  list-style: none;
+
+  a {
+    position: relative;
+    padding-bottom: 4px; // Space for active underline
+    font-size: 16px; // Standard font size
+    color: $text-color;
+
+    &.active-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: $text-color;
+    }
+    &:hover {
+      opacity: 0.7; // Subtle hover effect
+    }
+  }
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.search-box {
+  position: relative;
+  display: flex; // To align input and icon
+  align-items: center;
+
+  input {
+    background-color: $neutral-light-gray; // Light gray background
+    border: none;
+    border-radius: 4px;
+    padding: 9px 12px; // Increased padding
+    width: 240px;
+    font-size: 14px; // Increased font size
+    outline: none;
+    padding-right: 40px; // Make space for the icon
+
+    &::placeholder {
+      color: $neutral-dark-gray;
+    }
+  }
+  img {
+    position: absolute;
+    right: 12px;
+    width: 20px; // Adjust icon size
+    cursor: pointer;
+  }
+}
+
+.action-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  .action-icon-link {
+    position: relative;
+    display: flex; // To center image and potential badge
+    align-items: center;
+    img {
+      width: 24px; // Icon size
+      height: 24px;
+      cursor: pointer;
+    }
+    .badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: $primary-color;
+      color: white;
+      border-radius: 50%;
+      font-size: 10px;
+      padding: 2px 5px;
+      line-height: 1;
+    }
+
+    .wishlist-badge {
+  position: absolute;
+  top: -8px;          // Move the badge slightly up from the heart icon
+  right: -8px;        // Move the badge slightly right over the heart icon
+  background-color: $primary-color; // Use your brand red or $primary-color if preferred
+  color: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 400;
+  min-width: 20px;    // Minimum size for double digits/9+
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0 4px;     // Makes sure text is always centered even for 9+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  z-index: 1;
+}
+
+  }
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: $primary-color;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 500;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// --- ADD THIS AT THE VERY END OF YOUR SCSS FILE ---
+
+// Hamburger menu is hidden by default on large screens
+.hamburger-menu {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+
+  img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+// Media Query for tablet and mobile screens
+@media (max-width: 900px) {
+
+  // Hide the desktop navigation links
+  .main-nav ul {
+    display: none;
+  }
+  
+  // Hide the search box on smaller screens to save space
+  .search-box {
+    display: none;
+  }
+  
+  // Show the hamburger menu icon
+  .hamburger-menu {
+    display: block;
+  }
+
+  // --- Styles for the mobile menu when it's open ---
+  .main-nav.mobile-menu-open {
+    ul {
+      // Re-display the list when the menu is open
+      display: flex;
+      flex-direction: column;
+      
+      // Position the menu
+      position: absolute;
+      top: 100px; // Position it below the header
+      right: 0;
+      width: 100%;
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      gap: 20px;
+      z-index: 1000;
+    }
+
+    li a {
+      font-size: 18px; // Make links bigger for mobile
+    }
+  }
+}
+

@@ -1,0 +1,163 @@
+@use '../../../../styles.scss' as *;
+
+.product-card-container {
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: transparent; // No background on the main container
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  background-color: $bg-secondary-color; // Light grey background for the image
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; // Important for containing positioned elements
+
+  img {
+    // --- THIS IS THE ORIGINAL STYLING YOU WANT ---
+    padding: 20px;
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+  }
+
+  .discount-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: $primary-color;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    z-index: 1;
+  }
+
+  .actions-overlay {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 1;
+  }
+
+  .icon-button {
+    width: 34px;
+    height: 34px;
+    background-color: white;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    img {
+      width: 18px;
+      height: 18px;
+      padding: 0; // The icon itself should not have padding
+    }
+
+    &:hover {
+      background-color: $primary-color;
+      img {
+        filter: brightness(0) invert(1); // Makes icon white on hover
+      }
+    }
+  }
+
+  .add-to-cart-button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 9px 0;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 0 0 4px 4px;
+    cursor: pointer;
+    // Hide by default
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  // Show the "Add to Cart" button when hovering over the image container
+  &:hover .add-to-cart-button {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column; // This is the key: it stacks items vertically
+  align-items: flex-start;  // This aligns all items to the left
+
+  // You can add other styles like padding here if needed
+  padding-top: 16px; 
+  gap: 8px; // This creates a nice space between the name, price, and rating
+}
+
+.product-image {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+  flex-shrink: 0; // --- THIS IS THE CRITICAL FIX ---
+}
+
+.product-name {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.price-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  
+  .current-price {
+    color: $primary-color;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .old-price {
+    color: gray;
+    text-decoration: line-through;
+    opacity: 0.7;
+  }
+}
+
+.rating-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .review-count {
+    color: gray;
+    opacity: 0.8;
+  }
+}
+
+// Star rating colors
+:host ::ng-deep .star-filled {
+  color: #FFAD33; // A nice, rich yellow for the stars
+}
+:host ::ng-deep .star-empty {
+  color: #C1C1C1; // A light grey for the empty stars
+}

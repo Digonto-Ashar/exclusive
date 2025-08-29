@@ -1,0 +1,146 @@
+@use '../../../../styles.scss' as *;
+
+.promo-container {
+  width: 100%;
+  height: 500px;
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 55px;
+  margin-top: 140px; // Space from the section above
+}
+
+.promo-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.promo-category {
+  color: $secondary-color; // Our green variable
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.promo-title {
+  font-size: 48px;
+  font-weight: 600;
+  letter-spacing: 1.92px;
+  max-width: 440px;
+  line-height: 1.2;
+}
+
+.countdown-timer {
+  display: flex;
+  gap: 24px;
+
+  .time-block {
+    width: 62px;
+    height: 62px;
+    background-color: white;
+    color: black;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    small {
+      font-size: 11px;
+    }
+  }
+}
+
+.buy-now-button {
+  background-color: $secondary-color;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 16px 48px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($secondary-color, 10%);
+  }
+}
+
+.promo-image img {
+  max-width: 500px; // Adjust size as needed
+  height: auto;
+
+}
+
+
+// --- This is the new, CORRECT responsive block ---
+@media (max-width: 900px) {
+
+  .promo-container {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 20px;
+    gap: 30px;
+    height: auto;
+    // Add this as a safety net to prevent anything from spilling out
+    overflow: hidden;
+  }
+
+  .promo-content {
+    align-items: center;
+    gap: 24px;
+    width: 100%; // Ensure the content block fits the container
+  }
+
+  .promo-title {
+    font-size: 32px;
+    line-height: 1.2;
+    max-width: 100%; // Override the fixed desktop max-width
+  }
+
+  // --- THIS IS THE FIX FOR THE TIMER ---
+  .countdown-timer {
+    justify-content: center; // Center the circles
+    flex-wrap: wrap;       // Allow the circles to wrap to a new line
+    gap: 15px;             // Reduce the gap for mobile
+    
+    .time-block {
+      // Make the timer circles smaller
+      width: 50px;
+      height: 50px;
+
+      span { font-size: 14px; }
+      small { font-size: 10px; }
+    }
+  }
+
+  .buy-now-button {
+    padding: 14px 32px;
+    font-size: 14px;
+  }
+
+  .promo-image img {
+    max-width: 90%; // Ensure the image scales down
+    height: auto;
+  }
+}
+
+// --- For the very smallest screens ---
+@media (max-width: 480px) {
+  .promo-title {
+    font-size: 24px;
+  }
+  .promo-container {
+    padding: 30px 15px;
+  }
+}
+
+

@@ -1,0 +1,234 @@
+@use '../../../styles.scss' as *;
+
+.details-page-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 15px;
+}
+
+.breadcrumb {
+  margin-bottom: 40px;
+  font-size: 14px;
+  color: #888;
+  strong { color: #000; }
+}
+
+.product-main-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+}
+
+.image-gallery {
+  display: flex;
+  gap: 20px;
+  .thumbnails {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      cursor: pointer;
+      border-radius: 4px;
+      background-color: #f5f5f5;
+    }
+  }
+  .main-image-container {
+    flex-grow: 1;
+    .main-image {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      background-color: #f5f5f5;
+    }
+  }
+}
+
+.product-info {
+  .title { font-size: 24px; font-weight: 600; margin-bottom: 16px; }
+  .review-stock-info { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+  .filled {color: #FFAD33; }
+  .empty {color: #7e7d7d; }
+  .stock-status { font-size: 14px; color: #28a745; }
+  .price { font-size: 24px; margin-bottom: 16px; }
+  .description { font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
+  .separator { border: 0; border-top: 1px solid #e0e0e0; margin: 24px 0; }
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  .option-group { display: flex; align-items: center; gap: 16px; }
+  .label { font-weight: 500; }
+  .color-swatches { display: flex; gap: 8px; .swatch { width: 20px; height: 20px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; &.blue { background-color: #a0bce0; } &.red { background-color: #e07575; } &:hover, &.selected { border-color: #000; } } }
+  .size-boxes { display: flex; gap: 16px; button { width: 40px; height: 40px; border: 1px solid #888; border-radius: 4px; background: none; cursor: pointer; &.selected { background-color: $primary-color; color: #fff; border-color: $primary-color; } } }
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  .quantity-selector { display: flex; border: 1px solid #888; border-radius: 4px; button { width: 40px; height: 40px; border: none; background: none; font-size: 20px; cursor: pointer; } input { width: 60px; height: 40px; border: none; text-align: center; font-size: 16px; border-left: 1px solid #888; border-right: 1px solid #888; } }
+  .buy-now-btn { flex-grow: 1; background-color: $primary-color; color: #fff; border: none; border-radius: 4px; font-size: 16px; font-weight: 500; cursor: pointer; }
+  .wishlist-btn { width: 40px; height: 40px; border: 1px solid #888; border-radius: 4px; background: none; cursor: pointer; }
+}
+
+.delivery-info-box {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-top: 40px;
+  .delivery-option { display: flex; align-items: center; gap: 16px; padding: 16px; i { font-size: 24px; } h4 { margin: 0 0 4px; font-size: 16px; } p { margin: 0; font-size: 12px; } }
+  hr { border: 0; border-top: 1px solid #e0e0e0; margin: 0; }
+}
+
+.related-items-section {
+  margin-top: 80px;
+  padding-bottom: 100px;
+  .products-grid {
+    display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+    place-items: center;
+  }
+}
+
+.wishlist-btn img {
+  width: 24px;  
+  height: 24px;
+}
+
+.delivery-option img {
+  width: 40px;
+  height: 40px;
+ }
+ 
+ .delivery-option {
+  cursor: pointer;
+}
+
+
+// Container for the input field
+.postal-code-entry {
+  padding: 0 16px 16px 16px; // Add some padding
+}
+
+.postal-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+// The animated alert for feedback
+.delivery-feedback {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 4px;
+  color: #2E7D32; // A nice dark green for success text
+  background-color: #E8F5E9; // A light green background
+  font-weight: 500;
+  // Apply the animation here
+  animation: fadeInOut 4s ease-in-out;
+}
+
+// The keyframe animation for the alert
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  15% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+// ===================================================================
+// ===  RESPONSIVE STYLES FOR PRODUCT DETAILS PAGE
+// ===================================================================
+
+@media (max-width: 900px) {
+
+  // --- General Layout & Typography ---
+  .breadcrumb {
+    display: none; // Hide breadcrumbs on mobile to save space
+  }
+
+  // --- Main Product Section ---
+  // Switch from a two-column grid to a single vertical column
+  .product-main-section {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  // --- Image Gallery Transformation ---
+  .image-gallery {
+    flex-direction: column; // Stack the main image and thumbnails
+
+    // Place the thumbnails *below* the main image for a better mobile UX
+    .thumbnails {
+      order: 2; // Change the order
+      flex-direction: row; // Make the thumbnails a horizontal row
+      overflow-x: auto; // Allow horizontal scrolling if there are many thumbs
+      padding-bottom: 10px; // Space for the scrollbar
+
+      img {
+        width: 64px; // Make thumbnails a bit smaller
+        height: 64px;
+      }
+    }
+
+      .main-image {
+      max-height: 400px; // You can adjust this value to your liking
+      width: 100%;
+      height: auto;
+      object-fit: contain; // Ensures the whole image is visible
+    }
+
+    .main-image-container {
+      order: 1; // Ensure the main image comes first
+    }
+  }
+
+  // --- Product Information Adjustments ---
+  .product-info {
+    // Reduce font sizes for a more balanced mobile layout
+    .title { font-size: 20px; }
+    .price { font-size: 20px; }
+  }
+
+  // --- Options & Actions Stacking ---
+  // Stack the color/size option groups
+  .options .option-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  // Stack the main action buttons and make them full-width
+  .actions {
+    flex-direction: column;
+    gap: 12px;
+    
+    .buy-now-btn {
+      width: 100%; // Make the main button easy to tap
+      order: 1; // Put the primary button first
+      padding: 16px; // Give it a larger, more tappable height
+    }
+    .quantity-selector {
+      order: 2;
+      justify-content: center; // Center the quantity selector
+    }
+    .wishlist-btn {
+      order: 3;
+      align-self: center; // Center the wishlist button
+    }
+  }
+
+  // --- Delivery Info Box ---
+  .delivery-info-box {
+    margin-top: 30px;
+  }
+
+
+}

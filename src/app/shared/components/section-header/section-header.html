@@ -1,0 +1,23 @@
+<div class="header-container">
+  <!-- Top row for the colored category indicator and text -->
+  <div class="category-info">
+    <div class="category-indicator"></div>
+    <p class="category-text">{{ category }}</p>
+  </div>
+  
+  <!-- Bottom row, which contains the main title and all controls -->
+  <div class="main-header-row">
+    <div class="title-and-timer">
+      <h2 class="title">{{ title }}</h2>
+      <!-- This is where the timer will be projected into -->
+      <ng-content select="[timer]"></ng-content>
+    </div>
+    
+    <div class="controls">
+      <!-- This is where the navigation buttons will be projected into -->
+      <ng-content select="[nav-buttons]"></ng-content>
+      <ng-content select="[view-all-button]"></ng-content>
+      <ng-content select="[nav-buttons]"></ng-content>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,122 @@
+/* Main container for the whole checkout page */
+.checkout-container {
+  max-width: 1170px;
+  margin: 80px auto;
+  padding: 0 20px;
+}
+
+/* Styles for the breadcrumb navigation */
+.breadcrumb {
+  margin-bottom: 80px;
+  color: #808080;
+  font-size: 14px;
+  
+  strong {
+    color: black;
+  }
+}
+
+/* This is the main flex container for the two columns */
+.checkout-main-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 150px; /* The space between the form and the summary */
+}
+
+/* Left column containing the form */
+.billing-details-form {
+  flex: 1; /* Allows the form to take up available space */
+  max-width: 470px; /* Matches the width from the design */
+}
+
+/* Right column containing the order summary */
+.order-summary {
+  flex-basis: 470px; /* Gives the summary a fixed base width */
+  flex-shrink: 0; /* Prevents the summary from shrinking */
+}
+
+.billing-title {
+  font-size: 36px;
+  font-weight: 500;
+  margin-bottom: 48px;
+}
+
+/* Styles for each form field group (label + input) */
+.form-group {
+  margin-bottom: 24px;
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #808080;
+    font-size: 16px;
+  }
+  
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"] {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #F5F5F5; /* The light grey background */
+    font-size: 16px;
+    outline: none; /* Removes the default browser outline */
+  }
+
+  input:focus {
+    border-color: #DB4444; /* Highlight with your primary color on focus */
+  }
+}
+
+/* Styles for the checkbox */
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+  
+  label {
+    margin: 0;
+    color: black;
+  }
+}
+
+// ===================================================================
+// ===  RESPONSIVE STYLES FOR CHECKOUT PAGE
+// ===================================================================
+
+@media (max-width: 992px) { // A slightly wider breakpoint for this complex layout
+
+  // --- Main Layout Stacking ---
+  // Switch the main two-column layout to a single vertical column
+  .checkout-main-section {
+    flex-direction: column;
+    gap: 60px; // Adjust the gap for the new vertical layout
+  }
+
+  // --- Form and Summary Sizing ---
+  // Allow both the form and the summary to take up the full width
+  .billing-details-form,
+  .order-summary {
+    max-width: 100%;
+    flex-basis: auto; // Reset the fixed basis
+  }
+
+  // --- Typography and Spacing Adjustments ---
+  // Hide the breadcrumbs on mobile to save valuable screen space
+  .breadcrumb {
+    display: none;
+  }
+  
+  // Reduce the top margin for a tighter layout on mobile
+  .checkout-container {
+    margin-top: 40px;
+  }
+
+  // Make the main title smaller and reduce its bottom margin
+  .billing-title {
+    font-size: 28px;
+    margin-bottom: 32px;
+  }
+}

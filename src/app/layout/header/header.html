@@ -1,0 +1,65 @@
+<div class="promo-bar">
+  <div class="promo-content">
+    <span>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%! <a href="#" class="shop-now">ShopNow</a></span>
+    <div class="language-selector">
+      English <img src="assets/icons/dropdown.svg" alt="Dropdown">
+    </div>
+  </div>
+</div>
+
+<header class="app-header">
+  <div class="container">
+    <div class="logo">
+      <a routerLink="/">Exclusive</a>
+    </div>
+
+<!-- Main Navigation for Desktop -->
+<nav class="main-nav" [class.mobile-menu-open]="isMenuOpen">
+  <ul>
+    <li><a routerLink="/" (click)="closeMenu()">Home</a></li>
+    <li><a routerLink="/contact" (click)="closeMenu()">Contact</a></li>
+    <li><a routerLink="/about" (click)="closeMenu()">About</a></li>
+    <li><a routerLink="/signup" (click)="closeMenu()">Sign Up</a></li>
+  </ul>
+</nav>
+
+<!-- Hamburger Menu Button for Mobile -->
+<button class="hamburger-menu" (click)="toggleMenu()">
+  <img src="assets/icons/menu.svg" alt="Menu">
+</button>
+
+    <div class="header-actions">
+      <div class="search-box">
+        <input type="text" placeholder="What are you looking for?">
+        <img src="assets/icons/search.svg" alt="Search">
+      </div>
+      <div class="action-icons">
+        
+       
+     
+        
+        <a routerLink="/wishlist" class="action-icon-link">
+          <img src="assets/icons/heart.svg" alt="Wishlist">
+          <!-- The new wishlist badge -->
+          <span class="wishlist-badge" *ngIf="wishlistCount > 0">
+            {{ wishlistCountDisplay }}
+          </span>
+        </a>
+
+          <a routerLink="/cart" class="action-icon-link">
+          <img src="assets/icons/cart.svg" alt="Cart">
+          <!-- The new cart badge -->
+          <span class="cart-badge" *ngIf="cartItemCount > 0">
+            {{ cartCountDisplay }}
+          </span>
+        </a>
+
+        <a routerLink="/account" class="action-icon-link user-icon">
+            <img src="assets/icons/user.svg" alt="User">
+        </a>
+
+
+      </div>
+    </div>
+  </div>
+</header>

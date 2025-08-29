@@ -1,1 +1,71 @@
-/* You can add global styles to this file, and also import other style files */
+/* src/styles.scss */
+
+// 1. Variable Definitions
+// Define your color palette and fonts here for easy reuse.
+$primary-color: #DB4444;
+$secondary-color: #00FF66;
+$text-color: #000000;
+$background-color: #FFFFFF;
+$bg-secondary-color: #F5F5F5;
+$neutral-light-gray: #F5F5F5;
+$neutral-dark-gray: #7D8184;
+
+@use 'sass:color';
+
+// Font definitions
+$font-family-primary: 'Poppins', sans-serif; // Make sure to import this font if needed
+
+// 2. Global Resets and Base Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family-primary;
+  color: $text-color;
+  background-color: $background-color;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// 3. Main content wrapper style
+// This single rule ensures the main content area grows to push the footer down.
+main {
+  flex: 1;
+}
+
+button.view-all-button {
+  background-color: #DB4444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 16px 48px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+     background-color: color.adjust(#DB4444, $lightness: -10%);
+  }
+}
+
+// This class in your global styles.scss controls the entire page layout
+.main-content-container {
+  // 1. Set the maximum width for your content
+  max-width: 1170px; // This matches your homepage container
+
+  // 2. Use margin: auto to center it horizontally
+  margin: 0 auto;
+
+  // 3. Add some padding so content doesn't touch the screen edges on mobile
+  padding: 0 15px; 
+
+  // 4. Ensure it takes up the full width until it hits the max-width
+  width: 100%;
+}
