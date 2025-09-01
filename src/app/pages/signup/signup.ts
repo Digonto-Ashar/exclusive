@@ -60,8 +60,10 @@ const formValue = this.signupForm.value;
     };
 
     this.isLoading = true;
+    console.log('User Data:', userInfo);
     this.authService.signup(userInfo).subscribe({
       next: (response) => {
+        console.log('Signup successful:', response);
         this.notificationService.show('Account created successfully! Please log in.', 'success', 'slide', 4000);
         this.router.navigate(['/login']);
         this.isLoading = false;
