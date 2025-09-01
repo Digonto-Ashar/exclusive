@@ -55,6 +55,7 @@ onSubmit(): void {
       return;
     }
     this.isLoading = true;
+    console.log('User Login Info:', this.loginForm.value);
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
         console.log('Login successful!', response);

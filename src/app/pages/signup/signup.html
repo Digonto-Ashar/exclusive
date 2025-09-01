@@ -1,6 +1,5 @@
 <div class="signup-container">
   <!-- Left Side: Image Panel -->
-<!-- Left Side: Image Panel -->
 <div class="image-panel">
   <!-- Skeleton Loader -->
   <ngx-skeleton-loader
@@ -57,7 +56,7 @@
         </div>
 
         <button type="submit" class="create-account-button">Create Account</button>
-        <button type="button" class="google-signup-button">
+        <button type="button" class="google-signup-button" (click)="onGoogleClick()">
           <img src="assets/icons/google.svg" alt="Google icon">
           Sign up with Google
         </button>

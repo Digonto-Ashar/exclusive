@@ -59,6 +59,7 @@ const formValue = this.signupForm.value;
       phone: '1-570-236-7033'
     };
 
+
     this.isLoading = true;
     console.log('User Data:', userInfo);
     this.authService.signup(userInfo).subscribe({
@@ -75,4 +76,11 @@ const formValue = this.signupForm.value;
       }
     });
   }
+
+  onGoogleClick() {
+  console.log('Google signup clicked!');
+
+}
+
+
 }
