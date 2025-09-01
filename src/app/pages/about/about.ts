@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 // 1. Import the reusable component
 import { ServiceFeature } from '../../shared/components/service-feature/service-feature';
@@ -8,7 +8,7 @@ import { ServiceFeature } from '../../shared/components/service-feature/service-
   selector: 'app-about',
   standalone: true,
   // 2. Add the component to the imports array
-  imports: [CommonModule, ServiceFeature],
+  imports: [CommonModule, NgOptimizedImage, ServiceFeature],
   templateUrl: './about.html',
   styleUrls: ['./about.scss']
 })
