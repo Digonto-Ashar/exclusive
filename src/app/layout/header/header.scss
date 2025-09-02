@@ -27,22 +27,10 @@
     margin-left: 8px;
     text-decoration: underline;
   }
-
-  .language-selector {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-    img {
-      width: 10px;
-      filter: invert(1);
-    }
-  }
 }
 
 // Main Header
 .app-header {
-  // MODIFIED: Added position relative for the mobile menu context
   position: relative; 
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 25px 0;
@@ -88,7 +76,6 @@
   }
 }
 
-// NEW: Hide mobile-specific list items on desktop
 .mobile-action-item {
   display: none;
 }
@@ -179,15 +166,14 @@
   justify-content: center;
 }
 
-// NEW: Styles for the menu overlay
 .menu-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); // Semi-transparent black
-  z-index: 999; // Below the menu (1000), but above everything else
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
   cursor: pointer;
 }
 
@@ -204,86 +190,119 @@
   }
 }
 
+// Combined Language Selector Styles
+.language-selector {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  user-select: none;
+
+  img {
+    width: 10px;
+    filter: invert(1);
+  }
+
+  .language-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0; // Aligns the dropdown to the right to keep it in-screen
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    list-style: none;
+    padding: 8px 0;
+    margin-top: 8px;
+    min-width: 120px;
+
+    li {
+      padding: 10px 16px;
+      font-size: 14px;
+      color: #333;
+
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+  }
+}
+
 // Media Query for tablet and mobile screens
 @media (max-width: 900px) {
 
-  // Hide the desktop navigation links
   .main-nav ul {
     display: none;
   }
   
-  // Hide the search box and original action icons on smaller screens
   .search-box,
   .action-icons {
     display: none;
   }
   
-  // Show the hamburger menu icon
   .hamburger-menu {
     display: block;
   }
 
-  // --- Styles for the mobile menu when it's open ---
   .main-nav.mobile-menu-open {
     ul {
-      // Re-display the list when the menu is open
       display: flex;
       flex-direction: column;
       position: absolute;
-      top: 100%; // Position it directly below the header
+      top: 100%;
       left: 0;
       width: 100%;
-    background-color: rgba(255, 255, 255, 0.9); // White with 90% opacity
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);   // Restore the shadow for depth
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       padding: 20px;
       gap: 20px;
       z-index: 1000;
     }
 
     li a {
-      font-size: 18px; // Make links bigger for mobile
+      font-size: 18px;
     }
     
-    // NEW: Show and style the mobile-only action items
     .mobile-action-item {
-        display: block;
+      display: block;
 
-        a {
+      a {
+        display: inline-flex;
+        position: relative;
+        align-items: center;
+        gap: 15px;
+        font-size: 18px;
 
-            display: inline-flex;
-            position: relative; 
-            display: flex;
-            align-items: center;
-            gap: 15px; // Space between icon and text
-            font-size: 18px;
-
-            span { // This targets the text label
-                font-weight: 500;
-            }
-
-            img {
-                width: 24px;
-                height: 24px;
-            }
+        span {
+          font-weight: 500;
         }
 
-                .wishlist-badge, .cart-badge {
-                position: static;
-                top: 0;
-                right: 15px; // Position it from the right edge of the link
-                background-color: $primary-color;
-                color: #fff;
-                border-radius: 50%;
-                font-size: 12px;
-                font-weight: 400;
-                min-width: 20px;
-                height: 20px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                line-height: 1;
-                padding: 0 4px;
-            }
+        img {
+          width: 24px;
+          height: 24px;
+        }
+
+        .wishlist-badge, .cart-badge {
+          position: static;
+          background-color: $primary-color;
+          color: #fff;
+          border-radius: 50%;
+          font-size: 12px;
+          font-weight: 400;
+          min-width: 20px;
+          height: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          line-height: 1;
+          padding: 0 4px;
+        }
+      }
     }
   }
 }
+
+// THIS IS THE CORRECTED MEDIA QUERY for the language selector
+

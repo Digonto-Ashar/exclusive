@@ -1,9 +1,21 @@
 <div class="promo-bar">
   <div class="promo-content">
     <span>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%! <a href="#" class="shop-now">ShopNow</a></span>
-    <div class="language-selector">
-      English <img src="assets/icons/dropdown.svg" alt="Dropdown">
-    </div>
+<div class="language-selector" (click)="toggleLanguageDropdown()">
+  {{ selectedLanguage }} <img src="assets/icons/dropdown.svg" alt="Dropdown">
+  
+  <!-- The Dropdown Menu -->
+  <!-- It is shown or hidden based on the 'isLanguageDropdownOpen' property -->
+  @if (isLanguageDropdownOpen) {
+    <ul class="language-dropdown">
+      <!-- THIS IS THE FIX: Added '$event.stopPropagation()' to each click event -->
+      <li (click)="selectLanguage('English'); $event.stopPropagation()">English</li>
+      <li (click)="selectLanguage('Spanish'); $event.stopPropagation()">Spanish</li>
+      <li (click)="selectLanguage('French'); $event.stopPropagation()">French</li>
+      <li (click)="selectLanguage('German'); $event.stopPropagation()">German</li>
+    </ul>
+  }
+</div>
   </div>
 </div>
 

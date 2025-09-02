@@ -22,6 +22,24 @@ export class Header implements OnInit { // <-- 3. IMPLEMENT OnInit
 
   public isMenuOpen = false;
 
+    // Property to track the currently selected language
+  public selectedLanguage: string = 'English';
+
+  // Property to control the visibility of the dropdown
+  public isLanguageDropdownOpen: boolean = false;
+
+  // Toggles the dropdown menu open or closed
+  toggleLanguageDropdown(): void {
+    this.isLanguageDropdownOpen = !this.isLanguageDropdownOpen;
+  }
+
+  // Selects a new language, logs it to the console, and closes the dropdown
+  selectLanguage(language: string): void {
+    this.selectedLanguage = language;
+    console.log(`Selected language: ${language}`);
+    this.isLanguageDropdownOpen = false; // Close the dropdown after selection
+  }
+
   // --- 5. INJECT CartService IN THE CONSTRUCTOR ---
   constructor(
     private wishlistService: WishlistService,
