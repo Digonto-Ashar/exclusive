@@ -52,7 +52,7 @@
 @media (max-width: 768px) {
 
   // --- General Layout & Typography ---
-  // Hide the breadcrumbs on mobile to save space
+ 
   .breadcrumb {
     display: none;
   }
@@ -62,7 +62,7 @@
   }
 
   .not-found-content {
-    // Drastically reduce the main heading size for mobile
+
     h1 {
       font-size: 80px;
       margin-bottom: 20px;

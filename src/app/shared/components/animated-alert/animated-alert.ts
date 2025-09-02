@@ -21,11 +21,6 @@ import { CommonModule } from '@angular/common';
         animate('300ms ease-in', style({ transform: 'translateY(-100%)', opacity: 0 }))
       ]),
 
-      // ==========================================================
-      // === THE GUARANTEED SMOOTH, PURE FADE ANIMATION ===
-      // ==========================================================
-      // No movement. No scaling. No "pop". No "go left".
-
       // Entry for 'fade': Fades in from invisible.
       transition('void => fade', [
         style({ opacity: 0 }),

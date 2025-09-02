@@ -35,8 +35,6 @@ export class AuthService {
       tap(response => {
         // NOTE: FakeStoreAPI login doesn't return user info, just a token.
         // For a REAL app, you would decode the token or make another API call
-        // to get the user's name and email.
-        // For this example, we will create a mock user object.
         const mockUser: User = {
           id: 1, // Placeholder ID
           name: credentials.username, // Use the username from the login form

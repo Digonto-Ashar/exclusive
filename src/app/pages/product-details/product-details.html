@@ -1,156 +1,152 @@
-@if (!isLoading) {
 
-@if (product$ | async; as product) {
-  <div class="details-page-container">
-    
-    <!-- Breadcrumbs -->
-    <div class="breadcrumb">
-      <p>Account / {{ product.category }} / <strong>{{ product.title }}</strong></p>
-    </div>
-
-    <!-- Main Product Section -->
-    <div class="product-main-section">
+  @if (product$ | async; as product) {
+    <div class="details-page-container">
       
-      <!-- Image Gallery -->
-      <div class="image-gallery">
-        <div class="thumbnails">
-          <!-- In a real app, these would be different images of the product -->
-          <img [src]="product.image" (click)="changeMainImage(product.image)" alt="Thumbnail 1">
-          <img [src]="product.image" (click)="changeMainImage(product.image)" alt="Thumbnail 2">
-          <img [src]="product.image" (click)="changeMainImage(product.image)" alt="Thumbnail 3">
-          <img [src]="product.image" (click)="changeMainImage(product.image)" alt="Thumbnail 4">
-        </div>
-        <div class="main-image-container">
-          <img [src]="mainImage" [alt]="product.title" class="main-image">
-        </div>
+      <!-- Breadcrumbs -->
+      <div class="breadcrumb">
+        <p>Account / {{ product.category }} / <strong>{{ product.title }}</strong></p>
       </div>
 
-      <!-- Product Information -->
-      <div class="product-info">
-        <h1 class="title">{{ product.title }}</h1>
+      <!-- Main Product Section -->
+      <div class="product-main-section">
         
-        <div class="review-stock-info">
-          <div class="rating">
-            <!-- You would need a star rating component/method here -->
-            <span class="filled">★★★★</span><span class="empty">☆</span>
-            <span class="review-count">({{ product.rating.count }} Reviews)</span>
+        <!-- Image Gallery -->
+        <div class="image-gallery">
+          <div class="thumbnails">
+            <!-- In a real app, these would be different images of the product -->
+            <img [src]="product.image" (click)="changeMainImage(product.image)" alt="Thumbnail 1">
+            <img [src]="product.image" (click)="changeMainImage(product.image)" alt="Thumbnail 2">
+            <img [src]="product.image" (click)="changeMainImage(product.image)" alt="Thumbnail 3">
+            <img [src]="product.image" (click)="changeMainImage(product.image)" alt="Thumbnail 4">
           </div>
-          <span class="divider">|</span>
-          <span class="stock-status">In Stock</span>
+          <div class="main-image-container">
+            <img [src]="mainImage" [alt]="product.title" class="main-image">
+          </div>
         </div>
 
-        <p class="price">${{ product.price }}</p>
-        <p class="description">{{ product.description }}</p>
-        
-        <hr class="separator">
+        <!-- Product Information -->
+        <div class="product-info">
+          <h1 class="title">{{ product.title }}</h1>
+          
+          <div class="review-stock-info">
+            <div class="rating">
+              <span class="filled">★★★★</span><span class="empty">☆</span>
+              <span class="review-count">({{ product.rating.count }} Reviews)</span>
+            </div>
+            <span class="divider">|</span>
+            <span class="stock-status">In Stock</span>
+          </div>
 
-        <!-- Options -->
-        <div class="options">
-          <div class="option-group">
-            <span class="label">Colours:</span>
-            <div class="color-swatches">
-              <span class="swatch blue" (click)="selectColor('blue')"></span>
-              <span class="swatch red" (click)="selectColor('red')"></span>
+          <p class="price">${{ product.price }}</p>
+          <p class="description">{{ product.description }}</p>
+          
+          <hr class="separator">
+
+          <!-- Options -->
+          <div class="options">
+            <div class="option-group">
+              <span class="label">Colours:</span>
+              <div class="color-swatches">
+                <span class="swatch blue" (click)="selectColor('blue')"></span>
+                <span class="swatch red" (click)="selectColor('red')"></span>
+              </div>
+            </div>
+
+            <div class="option-group">
+              <span class="label">Size:</span>
+              <div class="size-boxes">
+                <button [class.selected]="selectedSize === 'XS'" (click)="selectSize('XS')">XS</button>
+                <button [class.selected]="selectedSize === 'S'" (click)="selectSize('S')">S</button>
+                <button [class.selected]="selectedSize === 'M'" (click)="selectSize('M')">M</button>
+                <button [class.selected]="selectedSize === 'L'" (click)="selectSize('L')">L</button>
+                <button [class.selected]="selectedSize === 'XL'" (click)="selectSize('XL')">XL</button>
+              </div>
             </div>
           </div>
 
-          <div class="option-group">
-            <span class="label">Size:</span>
-            <div class="size-boxes">
-              <button [class.selected]="selectedSize === 'XS'" (click)="selectSize('XS')">XS</button>
-              <button [class.selected]="selectedSize === 'S'" (click)="selectSize('S')">S</button>
-              <button [class.selected]="selectedSize === 'M'" (click)="selectSize('M')">M</button>
-              <button [class.selected]="selectedSize === 'L'" (click)="selectSize('L')">L</button>
-              <button [class.selected]="selectedSize === 'XL'" (click)="selectSize('XL')">XL</button>
+          <!-- Actions -->
+          <div class="actions">
+            <div class="quantity-selector">
+              <button (click)="decreaseQuantity()">-</button>
+              <input type="text" [value]="quantity" readonly>
+              <button (click)="increaseQuantity()">+</button>
+            </div>
+            <button class="buy-now-btn" (click)="addToCart(product)">Buy Now</button>
+            <button class="wishlist-btn" (click)="toggleWishlist(product)">
+              <!-- Show the FILLED heart if the item IS in the wishlist -->
+              @if (isInWishlist) {
+                <img src="assets/icons/heart-filled.svg" alt="In Wishlist">
+              } @else {
+                <!-- Show the OUTLINED heart if it IS NOT in the wishlist -->
+                <img src="assets/icons/heart.svg" alt="Add to Wishlist">
+              }
+            </button>
+          </div>
+
+          <!-- Delivery Info -->
+          <div class="delivery-info-box">
+            <!-- The main delivery option is now clickable -->
+            <div class="delivery-option" (click)="showPostalInput()">
+              <img src="assets/icons/delivery.svg" alt="Free Delivery">
+              <div>
+                <h4>Free Delivery</h4>
+
+                @if (!isPostalInputVisible) {
+                  <p>Enter your postal code for Delivery Availability</p>
+                } @else {
+                  <p>Press Enter to confirm your code</p>
+                }
+              </div>
+            </div>
+
+            <!-- This container for the input and alert is shown conditionally -->
+            @if (isPostalInputVisible) {
+              <div class="postal-code-entry">
+                <!-- The input field is tied to the postalCode property -->
+                <input 
+                  type="text" 
+                  [(ngModel)]="postalCode" 
+                  (keyup.enter)="checkDelivery()"
+                  placeholder="Enter postal code..."
+                  class="postal-input">
+                
+                <!-- The alert message is shown when deliveryMessage is not empty -->
+                @if (deliveryMessage) {
+                  <div class="delivery-feedback">
+                    {{ deliveryMessage }}
+                  </div>
+                }
+              </div>
+            }
+
+            <hr>
+            <div class="delivery-option">
+              <img src="assets/icons/reload.svg" alt="Return Delivery">
+              <div>
+                <h4>Return Delivery</h4>
+                <p>Free 30 Days Delivery Returns.</p>
+              </div>
             </div>
           </div>
         </div>
-
-        <!-- Actions -->
-        <div class="actions">
-          <div class="quantity-selector">
-            <button (click)="decreaseQuantity()">-</button>
-            <input type="text" [value]="quantity" readonly>
-            <button (click)="increaseQuantity()">+</button>
-          </div>
-          <button class="buy-now-btn" (click)="addToCart(product)">Buy Now</button>
-<button class="wishlist-btn" (click)="toggleWishlist(product)">
-  <!-- Show the FILLED heart if the item IS in the wishlist -->
-  @if (isInWishlist) {
-    <img src="assets/icons/heart-filled.svg" alt="In Wishlist">
-  } @else {
-    <!-- Show the OUTLINED heart if it IS NOT in the wishlist -->
-    <img src="assets/icons/heart.svg" alt="Add to Wishlist">
-  }
-</button>
-        </div>
-
-        <!-- Delivery Info -->
-
-<div class="delivery-info-box">
-  <!-- The main delivery option is now clickable -->
-  <div class="delivery-option" (click)="showPostalInput()">
-    <img src="assets/icons/delivery.svg" alt="Free Delivery">
-    <div>
-      <h4>Free Delivery</h4>
-      <!-- The text now changes to guide the user -->
-      @if (!isPostalInputVisible) {
-        <p>Enter your postal code for Delivery Availability</p>
-      } @else {
-        <p>Press Enter to confirm your code</p>
-      }
-    </div>
-  </div>
-
-  <!-- This container for the input and alert is shown conditionally -->
-  @if (isPostalInputVisible) {
-    <div class="postal-code-entry">
-      <!-- The input field is tied to the postalCode property -->
-      <input 
-        type="text" 
-        [(ngModel)]="postalCode" 
-        (keyup.enter)="checkDelivery()"
-        placeholder="Enter postal code..."
-        class="postal-input">
-      
-      <!-- The alert message is shown when deliveryMessage is not empty -->
-      @if (deliveryMessage) {
-        <div class="delivery-feedback">
-          {{ deliveryMessage }}
-        </div>
-      }
-    </div>
-  }
-
-  <hr>
-  <div class="delivery-option">
-    <img src="assets/icons/reload.svg" alt="Return Delivery">
-    <div>
-      <h4>Return Delivery</h4>
-      <p>Free 30 Days Delivery Returns.</p>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-
-
-    <!-- Related Items Section -->
-    <div class="related-items-section">
-      <app-section-header category="Related Items"  buttonText="See All" buttonLink="/"></app-section-header>
-      <div class="products-grid">
-        @if (relatedProducts$ | async; as related) {
-          @for (relatedProduct of related; track relatedProduct.id) {
-            <app-product-card [product]="relatedProduct"></app-product-card>
-          }
-        }
       </div>
-    </div>
-    </div>
 
+
+<!-- Related Items Section -->
+<div class="related-items-section">
+  <app-section-header category="Related Items" buttonText="See All" buttonLink="/"></app-section-header>
+  
+  <!-- CHANGE THIS CLASS to 'products-carousel' -->
+  <div class="products-carousel">
+    @if (relatedProducts$ | async; as related) {
+      @for (relatedProduct of related; track relatedProduct.id) {
+        <app-product-card [product]="relatedProduct"></app-product-card>
+      }
+    }
+  </div>
+</div>
+    </div>
   } @else {
-    <app-skeleton-product-details></app-skeleton-product-details>
+<app-skeleton-product-details></app-skeleton-product-details>
   }
-
-}
 

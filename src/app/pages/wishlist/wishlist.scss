@@ -131,14 +131,13 @@
 @media (max-width: 768px) {
 
   // --- Header Fixes ---
-  // Stack the "Wishlist" title and the "Move All" button vertically
+
   .header {
     flex-direction: column;
     gap: 20px; // Add space between the stacked items
   }
 
-  // --- "Just For You" Section Header Fixes ---
-  // Also stack this section's title and "See All" button
+
   .custom-section-header {
     flex-direction: column;
     align-items: flex-start; // Align items to the left for a cleaner look

@@ -179,22 +179,26 @@
   <hr class="section-divider">
 
   <!-- Section 4: Explore Our Products -->
-  <section class="content-section" #exploreProductsSection>
-    <app-section-header category="Our Products" title="Explore Our Products" ></app-section-header>
-    <div class="products-grid" >
-      <ng-container *ngIf="isExploreLoading"><app-skeleton-product-card *ngFor="let item of exploreSkeletonItems"></app-skeleton-product-card></ng-container>
-      <ng-container *ngIf="!isExploreLoading">
-        <!-- CORRECTED BINDING -->
-        <app-product-card *ngFor="let product of exploreProducts" [product]="product"></app-product-card>
-      </ng-container>
-    </div>
-    <div class="view-all-container" >
-     <button class="view-all-products-button" 
-        (click)="toggleExploreProductsView(); ">
-  {{ isExploreProductsExpanded ? 'View Less' : 'View All Products' }}
-</button>
-    </div>
-  </section>
+<!-- Section 4: Explore Our Products -->
+<section class="content-section" #exploreProductsSection>
+  <app-section-header category="Our Products" title="Explore Our Products"></app-section-header>
+
+  <!-- USE 'products-carousel' FOR HORIZONTAL SCROLLING -->
+  <div class="products-carousel">
+    <ng-container *ngIf="isExploreLoading">
+      <app-skeleton-product-card *ngFor="let item of exploreSkeletonItems"></app-skeleton-product-card>
+    </ng-container>
+    <ng-container *ngIf="!isExploreLoading">
+      <app-product-card *ngFor="let product of exploreProducts" [product]="product"></app-product-card>
+    </ng-container>
+  </div>
+
+  <div class="view-all-container">
+    <button class="view-all-products-button" (click)="toggleExploreProductsView()">
+      {{ isExploreProductsExpanded ? 'View Less' : 'View All Products' }}
+    </button>
+  </div>
+</section>
 
   <hr class="section-divider">
 

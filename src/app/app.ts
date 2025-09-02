@@ -7,7 +7,6 @@ import { AnimatedAlert } from './shared/components/animated-alert/animated-alert
 @Component({
   selector: 'app-root',
   standalone: true,
-  // This array makes the components available to your template
   imports: [RouterOutlet, Header, Footer, AnimatedAlert], 
   templateUrl: './app.html',
   styleUrls: ['./app.scss']

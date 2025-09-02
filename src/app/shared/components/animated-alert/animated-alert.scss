@@ -46,12 +46,11 @@
 
 
 // --- Media Query for Mobile ---
-// On screens 768px or less, we override the desktop positioning
 @media (max-width: 768px) {
   .alert-container {
     
-    right: 15px; // A small margin from the right edge
-    left: 15px;  // A small margin from the left edge
-    width: auto; // Allow the width to be determined by the left/right properties
+    right: 15px; 
+    left: 15px; 
+    width: auto; 
   }
 }

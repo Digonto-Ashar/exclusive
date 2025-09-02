@@ -2,14 +2,12 @@
 
   <!-- Header -->
   <div class="header">
-    <!-- 1. Use the correct wishlistCount$ observable -->
     <h2>Wishlist ({{ wishlistCount$ | async }})</h2>
     <button class="move-all-btn" (click)="moveAllToBag()">Move All To Bag</button>
   </div>
 
   <!-- Products Grid -->
   <div class="products-grid">
-    <!-- 2. The @if now uses the correct wishlistItems$ observable -->
     @if (wishlistItems$ | async; as products) {
       
       <!-- 3. The @for loops over 'products' and tracks by 'product.id' -->

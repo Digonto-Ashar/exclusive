@@ -23,12 +23,12 @@ import { SkeletonProductCard } from '../../shared/components/skeleton-product-ca
     CommonModule,
     RouterModule,
     ProductCard,
-    SkeletonProductCard // <-- Make sure this is imported
+    SkeletonProductCard 
   ],
   templateUrl: './wishlist.html',
   styleUrls: ['./wishlist.scss']
 })
-export class Wishlist implements OnInit { // <-- Implement OnInit
+export class Wishlist implements OnInit { 
 
   // --- REFERENCES TO HTML ELEMENTS ---
   @ViewChild('justForYouSection') justForYouSection!: ElementRef<HTMLDivElement>;

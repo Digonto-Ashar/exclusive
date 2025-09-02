@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-
-// Import all the page components that will be used in routing
 import { Home} from './pages/home/home';
 import { Login } from './pages/login/login';
 import { Signup } from './pages/signup/signup';
@@ -14,14 +12,13 @@ import { Wishlist  } from './pages/wishlist/wishlist';
 import { ProductDetails} from './pages/product-details/product-details';
 import { NotFound } from './pages/not-found/not-found';
 
-// We will create an authGuard later
-// import { authGuard } from './core/guards/auth.guard';
+
 
 export const routes: Routes = [
   // This is the homepage route. The empty path '' means it's the default page.
   { path: '', component: Home },
 
-  // Other top-level pages
+  // Other pages
   { path: 'login', component: Login },
   { path: 'signup', component: Signup },
   { path: 'contact', component: Contact },
@@ -35,7 +32,6 @@ export const routes: Routes = [
   {
     path: 'account',
     component: Account,
-    // canActivate: [authGuard], // We will enable this later
     children: [
       { path: '', redirectTo: 'profile', pathMatch: 'full' }, // Default to profile
       { path: 'profile', component: Profile },
@@ -45,6 +41,5 @@ export const routes: Routes = [
   },
 
 
-  // This is the "Page Not Found" route. It MUST be the last route.
   { path: '**', component: NotFound }
 ];

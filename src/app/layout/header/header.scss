@@ -2,7 +2,7 @@
 
 // Top Promotional Bar
 .promo-bar {
-  background-color: $text-color; // Black background
+  background-color: $text-color;
   color: white;
   padding: 12px 0;
   font-size: 14px;
@@ -12,13 +12,13 @@
     max-width: 1170px;
     margin: 0 auto;
     display: flex;
-    justify-content: flex-end; // Push English selector to the right
+    justify-content: flex-end;
     align-items: center;
-    padding: 0 15px; // Add padding for smaller screens
+    padding: 0 15px;
   }
 
   span {
-    margin-right: auto; // Pushes the language selector to the far right
+    margin-right: auto;
   }
 
   .shop-now {
@@ -34,15 +34,17 @@
     gap: 5px;
     cursor: pointer;
     img {
-      width: 10px; // Adjust dropdown icon size
-      filter: invert(1); // Make dropdown icon white
+      width: 10px;
+      filter: invert(1);
     }
   }
 }
 
 // Main Header
 .app-header {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1); // Lighter border
+  // MODIFIED: Added position relative for the mobile menu context
+  position: relative; 
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 25px 0;
 }
 
@@ -52,7 +54,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 15px; // Add padding for smaller screens
+  padding: 0 15px;
 }
 
 .logo {
@@ -62,13 +64,13 @@
 
 .main-nav ul {
   display: flex;
-  gap: 48px; // Increased gap for more spacing
+  gap: 48px;
   list-style: none;
 
   a {
     position: relative;
-    padding-bottom: 4px; // Space for active underline
-    font-size: 16px; // Standard font size
+    padding-bottom: 4px;
+    font-size: 16px;
     color: $text-color;
 
     &.active-link::after {
@@ -81,9 +83,14 @@
       background-color: $text-color;
     }
     &:hover {
-      opacity: 0.7; // Subtle hover effect
+      opacity: 0.7;
     }
   }
+}
+
+// NEW: Hide mobile-specific list items on desktop
+.mobile-action-item {
+  display: none;
 }
 
 .header-actions {
@@ -94,18 +101,18 @@
 
 .search-box {
   position: relative;
-  display: flex; // To align input and icon
+  display: flex;
   align-items: center;
 
   input {
-    background-color: $neutral-light-gray; // Light gray background
+    background-color: $neutral-light-gray;
     border: none;
     border-radius: 4px;
-    padding: 9px 12px; // Increased padding
+    padding: 9px 12px;
     width: 240px;
-    font-size: 14px; // Increased font size
+    font-size: 14px;
     outline: none;
-    padding-right: 40px; // Make space for the icon
+    padding-right: 40px;
 
     &::placeholder {
       color: $neutral-dark-gray;
@@ -114,7 +121,7 @@
   img {
     position: absolute;
     right: 12px;
-    width: 20px; // Adjust icon size
+    width: 20px;
     cursor: pointer;
   }
 }
@@ -126,45 +133,33 @@
 
   .action-icon-link {
     position: relative;
-    display: flex; // To center image and potential badge
+    display: flex;
     align-items: center;
     img {
-      width: 24px; // Icon size
+      width: 24px;
       height: 24px;
       cursor: pointer;
     }
-    .badge {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      background-color: $primary-color;
-      color: white;
-      border-radius: 50%;
-      font-size: 10px;
-      padding: 2px 5px;
-      line-height: 1;
-    }
 
     .wishlist-badge {
-  position: absolute;
-  top: -8px;          // Move the badge slightly up from the heart icon
-  right: -8px;        // Move the badge slightly right over the heart icon
-  background-color: $primary-color; // Use your brand red or $primary-color if preferred
-  color: #fff;
-  border-radius: 50%;
-  font-size: 12px;
-  font-weight: 400;
-  min-width: 20px;    // Minimum size for double digits/9+
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  padding: 0 4px;     // Makes sure text is always centered even for 9+
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  z-index: 1;
-}
-
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: $primary-color;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 400;
+      min-width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      padding: 0 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      z-index: 1;
+    }
   }
 }
 
@@ -184,9 +179,18 @@
   justify-content: center;
 }
 
-// --- ADD THIS AT THE VERY END OF YOUR SCSS FILE ---
+// NEW: Styles for the menu overlay
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); // Semi-transparent black
+  z-index: 999; // Below the menu (1000), but above everything else
+  cursor: pointer;
+}
 
-// Hamburger menu is hidden by default on large screens
 .hamburger-menu {
   display: none;
   background: none;
@@ -208,8 +212,9 @@
     display: none;
   }
   
-  // Hide the search box on smaller screens to save space
-  .search-box {
+  // Hide the search box and original action icons on smaller screens
+  .search-box,
+  .action-icons {
     display: none;
   }
   
@@ -224,14 +229,12 @@
       // Re-display the list when the menu is open
       display: flex;
       flex-direction: column;
-      
-      // Position the menu
       position: absolute;
-      top: 100px; // Position it below the header
-      right: 0;
+      top: 100%; // Position it directly below the header
+      left: 0;
       width: 100%;
-      background-color: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background-color: rgba(255, 255, 255, 0.9); // White with 90% opacity
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);   // Restore the shadow for depth
       padding: 20px;
       gap: 20px;
       z-index: 1000;
@@ -240,6 +243,47 @@
     li a {
       font-size: 18px; // Make links bigger for mobile
     }
+    
+    // NEW: Show and style the mobile-only action items
+    .mobile-action-item {
+        display: block;
+
+        a {
+
+            display: inline-flex;
+            position: relative; 
+            display: flex;
+            align-items: center;
+            gap: 15px; // Space between icon and text
+            font-size: 18px;
+
+            span { // This targets the text label
+                font-weight: 500;
+            }
+
+            img {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+                .wishlist-badge, .cart-badge {
+                position: static;
+                top: 0;
+                right: 15px; // Position it from the right edge of the link
+                background-color: $primary-color;
+                color: #fff;
+                border-radius: 50%;
+                font-size: 12px;
+                font-weight: 400;
+                min-width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
+                padding: 0 4px;
+            }
+    }
   }
 }
-

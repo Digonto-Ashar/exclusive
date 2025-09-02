@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 55px;
-  margin-top: 140px; // Space from the section above
+  margin-top: 140px; 
 }
 
 .promo-content {
@@ -20,7 +20,7 @@
 }
 
 .promo-category {
-  color: $secondary-color; // Our green variable
+  color: $secondary-color; 
   font-size: 16px;
   font-weight: 600;
 }
@@ -75,13 +75,12 @@
 }
 
 .promo-image img {
-  max-width: 500px; // Adjust size as needed
+  max-width: 500px; 
   height: auto;
 
 }
 
-
-// --- This is the new, CORRECT responsive block ---
+// --- Media Query for Tablets and Smaller Screens ---
 @media (max-width: 900px) {
 
   .promo-container {
@@ -103,14 +102,14 @@
   .promo-title {
     font-size: 32px;
     line-height: 1.2;
-    max-width: 100%; // Override the fixed desktop max-width
+    max-width: 100%; 
   }
 
-  // --- THIS IS THE FIX FOR THE TIMER ---
+
   .countdown-timer {
-    justify-content: center; // Center the circles
-    flex-wrap: wrap;       // Allow the circles to wrap to a new line
-    gap: 15px;             // Reduce the gap for mobile
+    justify-content: center; 
+    flex-wrap: wrap;       
+    gap: 15px;             
     
     .time-block {
       // Make the timer circles smaller
@@ -128,7 +127,7 @@
   }
 
   .promo-image img {
-    max-width: 90%; // Ensure the image scales down
+    max-width: 90%; 
     height: auto;
   }
 }

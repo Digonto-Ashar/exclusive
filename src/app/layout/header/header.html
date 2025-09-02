@@ -13,53 +13,64 @@
       <a routerLink="/">Exclusive</a>
     </div>
 
-<!-- Main Navigation for Desktop -->
-<nav class="main-nav" [class.mobile-menu-open]="isMenuOpen">
-  <ul>
-    <li><a routerLink="/" (click)="closeMenu()">Home</a></li>
-    <li><a routerLink="/contact" (click)="closeMenu()">Contact</a></li>
-    <li><a routerLink="/about" (click)="closeMenu()">About</a></li>
-    <li><a routerLink="/signup" (click)="closeMenu()">Sign Up</a></li>
-  </ul>
-</nav>
+    <!-- Main Navigation for Desktop & Mobile -->
+    <nav class="main-nav" [class.mobile-menu-open]="isMenuOpen">
+      <ul>
+        <li><a routerLink="/" (click)="closeMenu()">Home</a></li>
+        <li><a routerLink="/contact" (click)="closeMenu()">Contact</a></li>
+        <li><a routerLink="/about" (click)="closeMenu()">About</a></li>
+        <li><a routerLink="/signup" (click)="closeMenu()">Sign Up</a></li>
 
-<!-- Hamburger Menu Button for Mobile -->
-<button class="hamburger-menu" (click)="toggleMenu()">
-  <img src="assets/icons/menu.svg" alt="Menu">
-</button>
+        <!-- Links for the mobile menu -->
+        <li class="mobile-action-item">
+          <a routerLink="/wishlist" class="action-icon-link" (click)="closeMenu()">
+            <img src="assets/icons/heart.svg" alt="Wishlist">
+            <span>Wishlist</span>
+            <span class="wishlist-badge" *ngIf="wishlistCount > 0">{{ wishlistCountDisplay }}</span>
+          </a>
+        </li>
+        <li class="mobile-action-item">
+          <a routerLink="/cart" class="action-icon-link" (click)="closeMenu()">
+            <img src="assets/icons/cart.svg" alt="Cart">
+            <span>Cart</span>
+            <span class="cart-badge" *ngIf="cartItemCount > 0">{{ cartCountDisplay }}</span>
+          </a>
+        </li>
+        <li class="mobile-action-item">
+          <a routerLink="/account" class="action-icon-link user-icon" (click)="closeMenu()">
+            <img src="assets/icons/user.svg" alt="User">
+            <span>Account</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
 
     <div class="header-actions">
       <div class="search-box">
         <input type="text" placeholder="What are you looking for?">
         <img src="assets/icons/search.svg" alt="Search">
       </div>
+      
       <div class="action-icons">
-        
-       
-     
-        
         <a routerLink="/wishlist" class="action-icon-link">
           <img src="assets/icons/heart.svg" alt="Wishlist">
-          <!-- The new wishlist badge -->
-          <span class="wishlist-badge" *ngIf="wishlistCount > 0">
-            {{ wishlistCountDisplay }}
-          </span>
+          <span class="wishlist-badge" *ngIf="wishlistCount > 0">{{ wishlistCountDisplay }}</span>
         </a>
-
-          <a routerLink="/cart" class="action-icon-link">
+        <a routerLink="/cart" class="action-icon-link">
           <img src="assets/icons/cart.svg" alt="Cart">
-          <!-- The new cart badge -->
-          <span class="cart-badge" *ngIf="cartItemCount > 0">
-            {{ cartCountDisplay }}
-          </span>
+          <span class="cart-badge" *ngIf="cartItemCount > 0">{{ cartCountDisplay }}</span>
         </a>
-
         <a routerLink="/account" class="action-icon-link user-icon">
-            <img src="assets/icons/user.svg" alt="User">
+          <img src="assets/icons/user.svg" alt="User">
         </a>
-
-
       </div>
+
+      <button class="hamburger-menu" (click)="toggleMenu()">
+        <img src="assets/icons/menu.svg" alt="Menu">
+      </button>
     </div>
   </div>
+
+  <!-- NEW: Overlay div to catch outside clicks -->
+  <div class="menu-overlay" *ngIf="isMenuOpen" (click)="closeMenu()"></div>
 </header>

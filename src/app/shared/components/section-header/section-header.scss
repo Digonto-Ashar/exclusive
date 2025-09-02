@@ -28,20 +28,16 @@
   font-weight: 600;
 }
 
-/* 
-  THIS IS THE KEY TO THE SOLUTION.
-  We make the main row a flex container.
-*/
 .main-header-row {
   display: flex;
-  justify-content: space-between; /* Pushes the title and controls apart */
-  align-items: center;          /* Aligns them vertically */
+  justify-content: space-between; 
+  align-items: center;         
 }
 
 .title-and-timer {
   display: flex;
   align-items: center;
-  gap: 80px; /* Adds space between title and timer, if present */
+  gap: 80px; 
 }
 
 .title {
@@ -55,7 +51,7 @@
 .controls {
   display: flex;
   align-items: center;
-  gap: 16px; /* Adds space between multiple buttons */
+  gap: 16px; 
 }
 
 
